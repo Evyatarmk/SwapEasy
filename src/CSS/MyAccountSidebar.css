@@ -1,0 +1,65 @@
+/* Container Style */
+.sidebar-container {
+  margin-top:60px;
+  width: 250px;
+  height: 100vh; /* תופס את כל גובה החלון */
+  background-color: #f4f4f4;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed; /* כדי להישאר קבוע */
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto; /* גלילה אם התוכן ארוך מדי */
+  text-align: right;
+}
+
+/* User Info Section */
+.user-info {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  margin-bottom: 10px;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Menu List */
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  margin-bottom: 15px;
+}
+
+.menu-list a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu-list a:hover {
+  color:  #f0a500; /* שינוי צבע בקישור בריחוף */
+}
