@@ -1,18 +1,53 @@
-/* Container Style */
+/* סגנון Sidebar */
 .sidebar-container {
-  margin-top:60px;
   width: 250px;
   height: 100vh; /* תופס את כל גובה החלון */
   background-color: #f4f4f4;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-  position: fixed; /* כדי להישאר קבוע */
-  top: 0;
-  right: 0;
+  position: fixed;
+  top: 65px;
+  right: 0; /* גלוי במצב מחשב */
   display: flex;
   flex-direction: column;
   padding: 20px;
-  overflow-y: auto; /* גלילה אם התוכן ארוך מדי */
+  overflow-y: auto;
   text-align: right;
+  transition: transform 0.3s ease; /* אנימציה לפתיחה וסגירה */
+  z-index: 1000;
+}
+.sidebar-container-dev{
+  width: 250px;
+  height: 100vh; /* תופס את כל גובה החלון */
+  background-color: #f4f4f4;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 65px;
+  right: 0; /* גלוי במצב מחשב */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  text-align: right;
+  transition: transform 0.3s ease; /* אנימציה לפתיחה וסגירה */
+  z-index: 1000;
+}
+/* מוסתר במצב נייד */
+.sidebar-container.open {
+  transform: translateX(0);
+}
+
+.sidebar-container {
+  transform: translateX(100%); /* מוסתר כברירת מחדל */
+}
+
+/* כפתור סגירה */
+.close-button {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 /* User Info Section */
@@ -61,5 +96,59 @@
 }
 
 .menu-list a:hover {
-  color:  #f0a500; /* שינוי צבע בקישור בריחוף */
+  color: #f0a500;
+}
+
+/* כפתור פתיחה */
+.menu-toggle-MyAccountSidebar {
+  position: fixed;
+  top:20%; /* ממורכז אנכית */
+  right: 0;
+  transform: translateY(-50%); /* תיקון מיקום אנכי */
+  background-color: #f0b800;
+  border: none;
+  border-radius: 25px 0 0 25px; /* עיגול בצד שמאל */
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
+}
+.menu-toggle-MyAccountSidebar::after {
+  content: "<";
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  transition: transform 0.3s ease;
+}
+.menu-toggle-MyAccountSidebar:hover {
+  background-color: #d68e00;
+}
+
+.menu-toggle-MyAccountSidebar:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* מצב רספונסיבי */
+@media (min-width: 769px) {
+  .menu-toggle-MyAccountSidebar {
+    display: none; /* כפתור פתיחה מוסתר במסכים גדולים */
+  }
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+  .menu-toggle-MyAccountSidebar {
+    display: block; /* כפתור פתיחה מופיע במצב נייד */
+  }
+
+  .sidebar-container {
+    transform: translateX(100%); /* sidebar מוסתר כברירת מחדל */
+  }
+
+  .sidebar-container.open {
+    transform: translateX(0); /* sidebar גלוי */
+  }
 }
