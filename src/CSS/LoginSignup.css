@@ -1,0 +1,108 @@
+/* Container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Input Fields */
+.auth-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.auth-form input:focus {
+  border-color: #f0a500;
+  outline: none;
+  box-shadow: 0 0 4px rgba(240, 165, 0, 0.4);
+}
+
+/* Buttons */
+.auth-form button {
+  width: 100%;
+  background: #f0a500;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+  background: #d68e00;
+}
+
+/* Toggle Text */
+.toggle-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+.toggle-link {
+  color: #f0a500;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-link:hover {
+  color: #d68e00;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 10px;
+    width: 60%;
+  }
+
+  .form-wrapper {
+    padding: 15px;
+    max-width: 100%;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .auth-form input {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .auth-form button {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .toggle-text {
+    font-size: 12px;
+  }
+}

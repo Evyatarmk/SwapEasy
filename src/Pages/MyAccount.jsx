@@ -1,5 +1,5 @@
 import '../CSS/MyAccount.css'
-import MyAccountSidebar from '../FCglobal/MyAccountSidebar';
+import MyAccountSidebar from '../FCMyAccount/MyAccountSidebar';
 
 export default function MyAccount() {
   return (

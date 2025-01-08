@@ -1,0 +1,114 @@
+/* Container */
+.post-ad-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: right;
+  direction: rtl;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* Form Styling */
+.post-ad-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.post-ad-form input,
+.post-ad-form select,
+.post-ad-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.post-ad-form input:focus,
+.post-ad-form select:focus,
+.post-ad-form textarea:focus {
+  border-color: #f0a500;
+  outline: none;
+  box-shadow: 0 0 4px rgba(240, 165, 0, 0.4);
+}
+
+/* Image Upload */
+.image-upload input {
+  display: block;
+  margin-top: 10px;
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-item {
+  position: relative;
+}
+
+.image-item img {
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.image-item button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Submit Button */
+.submit-button {
+  width: 100%;
+  background: #f0a500;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #d68e00;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .post-ad-container {
+    padding: 15px;
+    width: 60%;
+    margin: 0;
+  }
+
+  .submit-button {
+    font-size: 16px;
+    padding: 12px;
+  }
+}

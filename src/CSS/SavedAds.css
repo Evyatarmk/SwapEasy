@@ -1,0 +1,112 @@
+/* Container for the Saved Ads Page */
+.saved-ads-container {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+}
+
+.saved-ads-container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+
+
+.saved-ad {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+}
+
+.ad-thumbnail {
+  width: 100px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+.ad-info {
+  flex-grow: 1;
+}
+
+.ad-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.category, .price {
+  font-size: 14px;
+  color: #777;
+}
+
+
+
+
+.delete-button {
+  padding: 8px 16px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #f44336;
+  color: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  padding: 0;
+  align-self: start;
+}
+
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 480px) {
+  .saved-ads-container {
+    padding: 10px;
+  }
+
+  .saved-ads-container h2 {
+    font-size: 20px;
+  }
+
+  .saved-ads-list {
+    grid-template-columns: 1fr;
+  }
+
+  .saved-ad {
+    padding: 15px;
+  }
+
+  .ad-thumbnail {
+    width: 80px;
+    height: 60px;
+  }
+
+  .ad-info h3 {
+    font-size: 16px;
+  }
+
+  .category, .price {
+    font-size: 12px;
+  }
+
+  .delete-button {
+    font-size: 12px;
+    
+  }
+}
