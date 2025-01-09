@@ -21,7 +21,7 @@ export default function Header() {
           <li><a href="#about">המוצרים שלנו</a></li>
           <li>
             <a href="#contact">
-              התחברות
+              אזור אישי
               <img className="UserPhoto" src={UserIcon} alt="User Icon" />
             </a>
           </li>
@@ -33,7 +33,7 @@ export default function Header() {
           <li><a href="#about">המוצרים שלנו</a></li>
           <li>
             <a href="#contact">
-              התחברות
+            אזור אישי
               <img className="UserPhoto" src={UserIcon} alt="User Icon" />
             </a>
           </li>
