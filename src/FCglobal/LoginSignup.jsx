@@ -26,7 +26,8 @@ export default function LoginSignup() {
           </form>
         ) : (
           <form className="auth-form">
-            <input type="text" placeholder="שם מלא" required />
+            <input type="text" placeholder="שם פרטי" required />
+            <input type="text" placeholder="שם משפחה" required />
             <input type="email" placeholder="אימייל" required />
             <input type="password" placeholder="סיסמה" required />
             <input type="password" placeholder="אישור סיסמה" required />

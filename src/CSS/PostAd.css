@@ -1,6 +1,6 @@
 /* Container */
 .post-ad-container {
-  max-width: 800px;
+  max-width: 700px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
@@ -18,11 +18,10 @@ h2 {
 }
 
 /* Form Styling */
-.post-ad-form label {
-  display: block;
-  margin-bottom: 15px;
-  font-size: 16px;
+.post-ad-form  h3 {
+  font-size: 18px;
   color: #333;
+  margin-bottom: 10px;
 }
 
 .post-ad-form input,
@@ -103,7 +102,6 @@ h2 {
 @media (max-width: 480px) {
   .post-ad-container {
     padding: 15px;
-    width: 60%;
     margin: 0;
   }
 
@@ -111,4 +109,84 @@ h2 {
     font-size: 16px;
     padding: 12px;
   }
+}
+/* Product Condition Section */
+
+.product-condition h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.condition-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+
+
+.condition-button {
+  color:  #000000;
+  margin: 5px;
+  border: solid 0.5px #000000 ;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.condition-button.active {
+  background-color: #d68f0028;
+  color:  #d68f00;
+  border: solid 0.5px #d68f00 ;
+}
+.condition-button:hover {
+  background-color: #d68f0028;
+  color:  #d68f00;
+  border: solid 0.5px #d68f00 ;
+
+}
+/* Pickup Location Section */
+
+
+.pickup-location h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.pickup-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.pickup-location label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.pickup-location input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.pickup-location input:focus {
+  border-color: #f0a500;
+  outline: none;
+  box-shadow: 0 0 4px rgba(240, 165, 0, 0.4);
+}
+.error-message {
+  color: #f44336;
+  font-size: 14px;
+  margin-top: 10px;
 }

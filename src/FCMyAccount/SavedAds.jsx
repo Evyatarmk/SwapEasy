@@ -1,5 +1,6 @@
 import React from 'react';
 import '../CSS/SavedAds.css';
+import haertIcon from '../Icons/heart.png';
 
 export default function SavedAds() {
   // כאן אפשר להכניס את המודעות ששמרת, לדוגמה:
@@ -15,11 +16,13 @@ export default function SavedAds() {
       <div className="saved-ads-list">
         {savedAds.map((ad) => (
           <div className="saved-ad" key={ad.id}>
-              <button className="delete-button">✖</button>
             <div className="ad-info">
+            <div className="ad-info-header">
+              <img className="haert-button" src={haertIcon}/>
+              <p className="price">{ad.price}</p>
+            </div>
               <h3>{ad.title}</h3>
               <p className="category">{ad.category}</p>
-              <p className="price">{ad.price}</p>
             </div>
             <img src={ad.image} alt="מודעה" className="ad-thumbnail" />
           </div>

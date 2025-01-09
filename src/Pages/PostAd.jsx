@@ -3,11 +3,13 @@ import "../CSS/PostAd.css";
 
 export default function PostAd() {
   const [images, setImages] = useState([]);
+  const [productCondition, setProductCondition] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const filteredFiles = files.filter((file) => !images.some((img) => img.name === file.name));
-    let newImages=[...images, ...filteredFiles]
+    const newImages = [...images, ...filteredFiles];
     setImages(newImages);
   };
 
@@ -15,9 +17,18 @@ export default function PostAd() {
     setImages(images.filter((_, i) => i !== index));
   };
 
+  const handleConditionClick = (condition) => {
+    setProductCondition(condition);
+    setErrorMessage(""); // Reset error message when a condition is selected
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("מודעה נשלחה בהצלחה!");
+    if (!productCondition) {
+      setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
+      return;
+    }
+    alert(`מודעה נשלחה בהצלחה!\nמצב המוצר: ${productCondition}`);
   };
 
   return (
@@ -53,6 +64,51 @@ export default function PostAd() {
           מחיר:
           <input type="number" placeholder="₪" min="0" required />
         </label>
+
+        {/* מצב המוצר */}
+        <div className="product-condition">
+          <h3>מצב המוצר</h3>
+          <p className="condition-description">
+            השתדלו לדייק כדי לא לאכזב את הלקוחות שלכם
+          </p>
+          <div className="condition-buttons">
+            {["חדש באריזה", "כמו חדש", "משומש", "נדרש תיקון", "לא רלוונטי"].map(
+              (condition) => (
+                <button
+                  key={condition}
+                  type="button"
+                  className={`condition-button ${
+                    productCondition === condition ? "active" : ""
+                  }`}
+                  onClick={() => handleConditionClick(condition)}
+                >
+                  {condition}
+                </button>
+              )
+            )}
+          </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+        </div>
+
+        {/* כתובת האיסוף */}
+        <div className="pickup-location">
+          <h3>מאיפה אוספים את המוצר?</h3>
+          <p className="pickup-description">
+            אנחנו ממליצים שזו תהיה הכתובת בה נמצאים רוב היום (בית או מקום עבודה). אל דאגה, נפרסם רק את העיר ולא את הכתובת המלאה.
+          </p>
+          <label>
+            יישוב:
+            <input type="text" placeholder="שם היישוב" required />
+          </label>
+          <label>
+            רחוב:
+            <input type="text" placeholder="שם הרחוב" required />
+          </label>
+          <label>
+            מס׳:
+            <input type="text" placeholder="מספר הבית" required />
+          </label>
+        </div>
 
         {/* העלאת תמונות */}
         <label className="image-upload">

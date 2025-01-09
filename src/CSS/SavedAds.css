@@ -23,20 +23,31 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  justify-content: end;
   padding: 10px;
   margin: 5px;
 }
 
 .ad-thumbnail {
-  width: 100px;
-  height: 80px;
+  width: 125px;
+  height: 100px;
   object-fit: cover;
   border-radius: 8px;
   margin-right: 20px;
 }
 
 .ad-info {
-  flex-grow: 1;
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.ad-info-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .ad-info h3 {
@@ -45,33 +56,23 @@
   color: #333;
 }
 
-.category, .price {
+.category {
   font-size: 14px;
   color: #777;
 }
-
-
-
-
-.delete-button {
-  padding: 8px 16px;
-  margin: 5px 0;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  background-color: #f44336;
-  color: white;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-  padding: 0;
-  align-self: start;
+.price{
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 
-.delete-button:hover {
-  background-color: #d32f2f;
+
+
+.haert-button  {
+  cursor: pointer;
+  height: 25px;
+  padding: 0;
 }
 
 /* Responsive Design for Mobile */
@@ -105,8 +106,5 @@
     font-size: 12px;
   }
 
-  .delete-button {
-    font-size: 12px;
-    
-  }
+
 }

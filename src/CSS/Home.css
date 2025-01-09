@@ -1,0 +1,124 @@
+/* עיצוב כללי */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* סגנונות לקרוסלה */
+.product-slide {
+  text-align: center;
+}
+
+.product-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* סרגל קטגוריות */
+.category-bar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-self: end;
+}
+
+.category-btn {
+  padding: 8px 25px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border: 0.01px solid black;
+  transition: background-color 0.3s ease;
+
+}
+
+
+
+.category-btn.selected {
+  background-color: #d68e00;
+  color: white;
+}
+
+/* רשימת מוצרים */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.product-item {
+  width: 250px;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
+}
+/* עיצוב לכפתור הבא (next) */
+button.slick-arrow.slick-next {
+  background-color: #d68e00;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+button.slick-arrow.slick-next:hover {
+  background-color: #d68e00;
+  opacity: 0.8;
+}
+
+/* עיצוב לכפתור הקודם (prev) */
+button.slick-arrow.slick-prev {
+  background-color: #d68e00;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+button.slick-arrow.slick-prev:hover {
+  background-color: #d68e00;
+  opacity: 0.8;
+}

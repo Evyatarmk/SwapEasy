@@ -79,7 +79,6 @@ h2 {
 @media (max-width: 480px) {
   .auth-container {
     padding: 10px;
-    width: 60%;
   }
 
   .form-wrapper {

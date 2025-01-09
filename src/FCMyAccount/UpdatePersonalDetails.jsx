@@ -3,10 +3,14 @@ import "../CSS/UpdatePersonalDetails.css";
 
 export default function UpdatePersonalDetails() {
   const [formData, setFormData] = useState({
-    name: "אביתר מקבריט",
-    email: "mt@gmail.com",
-    phone: "050-1234567",
-    address: "רחוב הדוגמה 10, תל אביב",
+    firstName: "אביתר",
+    lastName: "מקבריט",
+    phone: "053-8272107",
+    email: "evyatar.mt@gmail.com",
+    birthDate: "",
+    city: "",
+    street: "",
+    houseNumber: "",
   });
 
   const handleChange = (e) => {
@@ -19,40 +23,47 @@ export default function UpdatePersonalDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // שלח את המידע המעודכן לשרת או בצע פעולה כלשהי
     alert("הפרטים האישיים עודכנו בהצלחה!");
+  };
+
+  const handleCancel = () => {
+    // פעולה לביטול (ניתן לאפס את השדות אם נדרש)
+    alert("השינויים בוטלו.");
   };
 
   return (
     <div className="update-details-container">
-      <h2>עדכון פרטים אישיים</h2>
+      <h2>עדכון פרטים</h2>
       <form onSubmit={handleSubmit} className="update-details-form">
+        {/* שם פרטי */}
         <div className="form-group">
-          <label htmlFor="name">שם מלא:</label>
+          <label htmlFor="firstName">שם פרטי*</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="firstName"
+            name="firstName"
+            value={formData.firstName}
             onChange={handleChange}
             required
           />
         </div>
 
+        {/* שם משפחה */}
         <div className="form-group">
-          <label htmlFor="email">אימייל:</label>
+          <label htmlFor="lastName">שם משפחה*</label>
           <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
             onChange={handleChange}
             required
           />
         </div>
 
+        {/* טלפון נייד */}
         <div className="form-group">
-          <label htmlFor="phone">טלפון:</label>
+          <label htmlFor="phone">טלפון נייד*</label>
           <input
             type="text"
             id="phone"
@@ -63,19 +74,80 @@ export default function UpdatePersonalDetails() {
           />
         </div>
 
+        {/* מייל */}
         <div className="form-group">
-          <label htmlFor="address">כתובת:</label>
+          <label htmlFor="email">מייל*</label>
           <input
-            type="text"
-            id="address"
-            name="address"
-            value={formData.address}
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
 
-        <button type="submit" className="update-button">שמור שינויים</button>
+        {/* תאריך לידה */}
+        <div className="form-group">
+          <label htmlFor="birthDate">תאריך לידה</label>
+          <input
+            type="date"
+            id="birthDate"
+            name="birthDate"
+            value={formData.birthDate}
+            onChange={handleChange}
+          />
+          <small>אולי נצליח להפתיע אותך עם ברכה ביום ההולדת!</small>
+        </div>
+
+        {/* כתובת */}
+        <h3>כתובת</h3>
+        <p>כדאי למלא את הכתובת, כדי שנוכל לחבר אותה אוטומטית בפעם הבאה שתפרסמו מודעה</p>
+        <div className="form-group">
+          <label htmlFor="city">יישוב / עיר*</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="street">רחוב*</label>
+          <input
+            type="text"
+            id="street"
+            name="street"
+            value={formData.street}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="houseNumber">מספר בית*</label>
+          <input
+            type="text"
+            id="houseNumber"
+            name="houseNumber"
+            value={formData.houseNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* כפתורי שמירה וביטול */}
+        <div className="form-buttons">
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            ביטול
+          </button>
+          <button type="submit" className="update-button">
+            שמירה
+          </button>
+        </div>
       </form>
     </div>
   );

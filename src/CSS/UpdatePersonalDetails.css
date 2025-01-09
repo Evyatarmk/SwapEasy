@@ -1,5 +1,5 @@
 .update-details-container {
-  max-width: 400px;
+  max-width: 700px;
   margin: 40px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -45,9 +45,15 @@
   outline: none;
   box-shadow: 0 0 5px rgba(240, 165, 0, 0.5);
 }
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
 
 .update-button {
-  width: 100%;
+  width:50%;
   padding: 10px;
   background-color: #f0a500;
   color: white;
