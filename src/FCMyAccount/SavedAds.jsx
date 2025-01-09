@@ -1,6 +1,6 @@
 import React from 'react';
 import '../CSS/SavedAds.css';
-import haertIcon from '../Icons/heart.png';
+import AdHomeDisplay from '../FCglobal/AdDisplay';
 
 export default function SavedAds() {
   // כאן אפשר להכניס את המודעות ששמרת, לדוגמה:
@@ -15,17 +15,7 @@ export default function SavedAds() {
       <h2>המודעות השמורות שלי</h2>
       <div className="saved-ads-list">
         {savedAds.map((ad) => (
-          <div className="saved-ad" key={ad.id}>
-            <div className="ad-info">
-            <div className="ad-info-header">
-              <img className="haert-button" src={haertIcon}/>
-              <p className="price">{ad.price}</p>
-            </div>
-              <h3>{ad.title}</h3>
-              <p className="category">{ad.category}</p>
-            </div>
-            <img src={ad.image} alt="מודעה" className="ad-thumbnail" />
-          </div>
+          <AdHomeDisplay ad={ad}/>
         ))}
       </div>
     </div>

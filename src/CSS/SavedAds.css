@@ -17,58 +17,6 @@
 
 
 
-.saved-ad {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  padding: 10px;
-  margin: 5px;
-}
-
-.ad-thumbnail {
-  width: 125px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 20px;
-}
-
-.ad-info {
-  margin: 10px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-}
-.ad-info-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.ad-info h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.category {
-  font-size: 14px;
-  color: #777;
-}
-.price{
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-
-
-
 .haert-button  {
   cursor: pointer;
   height: 25px;

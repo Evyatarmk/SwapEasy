@@ -3,33 +3,28 @@ import Slider from 'react-slick';
 import '../CSS/Home.css'; // כל הסגנונות יהיו כאן
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import AdDisplay from '../FCglobal/AdDisplay';
 
-// קובץ React שמציג את הקרוסלה
-const products = [
-  { id: 1, title: 'מוצר 1', image: 'path_to_image_1.jpg', price: '₪100' },
-  { id: 2, title: 'מוצר 2', image: 'path_to_image_2.jpg', price: '₪200' },
-  { id: 3, title: 'מוצר 3', image: 'path_to_image_3.jpg', price: '₪300' },
-  // הוסף עוד מוצרים כאן
-];
+
 
 const settings = {
-  arrows:true,
+  arrows: true,
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 5,
-  
+  slidesToShow: 2,
+
 };
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  const categories = ['רכב', 'דירות', 'טכנולוגיה', 'חיות מחמד'];
+  const categories = ['רכב', 'דירות', 'טכנולוגיה',];
+  const Ads = [
+    { id: 1, title: 'מודעה 1', category: 'רכב', price: '₪50,000', image: "" },
+    { id: 2, title: 'מודעה 2', category: 'דירות', price: '₪1,200,000', image: '' },
+    { id: 3, title: 'מודעה 3', category: 'טכנולוגיה', price: '₪3,000', image: "" },
+  ];
 
-  const productsByCategory = {
-    רכב: products.filter(product => product.title.includes('רכב')),
-    דירות: products.filter(product => product.title.includes('דירות')),
-    טכנולוגיה: products.filter(product => product.title.includes('טכנולוגיה')),
-  };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -37,19 +32,13 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      {/* קרוסלה */}
-      <h2>הקרוסלה של מוצרים</h2>
       <Slider {...settings}>
-        {products.map((product) => (
-          <div key={product.id} className="product-slide">
-            <h3>{product.title}</h3>
-            <p>{product.price}</p>
-          </div>
+        {Ads.map((ad) => (
+          <AdDisplay ad={ad} />
         ))}
       </Slider>
 
       {/* סרגל קטגוריות */}
-      <h2>בחר קטגוריה</h2>
       <div className="category-bar">
         {categories.map((category) => (
           <button
@@ -61,16 +50,13 @@ export default function Home() {
           </button>
         ))}
       </div>
+      {/* סרגל סינון */}
+    
 
       {/* רשימת מוצרים לפי הקטגוריה */}
-      <h2>מוצרים בקטגוריה: {selectedCategory}</h2>
       <div className="product-list">
-        {selectedCategory && productsByCategory[selectedCategory].map((product) => (
-          <div key={product.id} className="product-item">
-            <img src={product.image} alt={product.title} className="product-image" />
-            <h3>{product.title}</h3>
-            <p>{product.price}</p>
-          </div>
+        {selectedCategory && Ads.filter((ad) => ad.category === selectedCategory).map((ad) => (
+          <AdDisplay ad={ad} key={ad.id} />
         ))}
       </div>
     </div>
