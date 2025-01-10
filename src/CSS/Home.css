@@ -34,8 +34,10 @@ h2 {
 
 
 .category-btn.selected {
-  background-color: #d68e00;
+  background-color: #f0a500;
   color: white;
+  border:0;
+
 }
 
 /* רשימת מוצרים */
