@@ -4,6 +4,7 @@ import '../CSS/Home.css'; // כל הסגנונות יהיו כאן
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import AdDisplay from '../FCglobal/AdDisplay';
+import FilterBar from '../FCHome/FilterBar';
 
 
 
@@ -51,7 +52,7 @@ export default function Home() {
         ))}
       </div>
       {/* סרגל סינון */}
-    
+    <FilterBar/>
 
       {/* רשימת מוצרים לפי הקטגוריה */}
       <div className="product-list">

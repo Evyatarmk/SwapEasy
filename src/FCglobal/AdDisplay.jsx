@@ -1,4 +1,5 @@
 import haertIcon from '../Icons/heart.png';
+import heartEmptyIcon from '../Icons/heartEmpty.png';
 import '../CSS/AdHomeDisplay.css'
 
 export default function AdDisplay(props) {
@@ -7,7 +8,7 @@ export default function AdDisplay(props) {
     <div className="container-ad" key={ad.id}>
       <div className="ad-info">
         <div className="ad-info-header">
-          <img className="haert-button" src={haertIcon} />
+          <img className="haert-button" src={heartEmptyIcon} />
           <p className="price">{ad.price}</p>
         </div>
         <h3>{ad.title}</h3>

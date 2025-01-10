@@ -107,12 +107,15 @@ body {
 
 /* User Photo */
 .UserPhoto {
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   margin-left: 8px;
   vertical-align: middle;
   border-radius: 50%;
   object-fit: fill;
+   border: solid 0.1px #f0a500 ;
+   padding: 5px;
+   background-color: #f0a4001e;
 }
 
 /* Responsive Styles */
@@ -154,4 +157,43 @@ body {
   .desktop-nav .nav-links li {
     margin-left: 20px;
   }
+}
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 5px;
+  width: 200px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  z-index: 100;
+}
+
+.dropdown-menu li {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  transition: background-color 0.3s;
+  padding: 10px;
+  text-align: end;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
 }

@@ -1,0 +1,48 @@
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  direction: rtl;
+}
+
+.filter-input {
+  flex: 1 1 calc(20% - 10px);
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.filter-input::placeholder {
+  color: #999;
+}
+
+.price-filter {
+  display: flex;
+  gap: 10px;
+  flex: 1 1 calc(40% - 10px);
+}
+
+.price-filter input {
+  flex: 1 1 calc(50% - 5px);
+}
+
+
+.filter-button {
+  width:20%;
+  padding: 10px;
+  background-color: #f0a500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #e08900;
+}
