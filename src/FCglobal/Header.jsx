@@ -1,34 +1,35 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../CSS/Header.css';
 import UserIcon from '../Icons/User-icon.png';
-import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleMouseEnter = () => setDropdownVisible(true);
   const handleMouseLeave = () => setDropdownVisible(false);
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <header className="fixed-header">
-      
-      <div className="logo"><Link to="/Home">MyWebsite</Link></div>
+      {/* לוגו */}
+      <div className="logo">
+        <Link to="/Home">MyWebsite</Link>
+      </div>
+
+      {/* ניווט דסקטופ */}
       <nav className="desktop-nav">
-      <button className="menu-toggle" onClick={toggleSidebar}>
-        ☰
-      </button>
         <ul className="nav-links">
-          <li><Link to="/ItemDetails">המוצרים שלנו</Link></li>
+          <li><Link to="/products">המוצרים שלנו</Link></li>
           <li
             className="dropdown-wrapper"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <Link to="/personal-area" className="dropdown-link">
+            <span className="dropdown-link">
               <img className="UserPhoto" src={UserIcon} alt="User Icon" />
-            </Link>
+            </span>
             {isDropdownVisible && (
               <ul className="dropdown-menu">
                 <li><Link to="/profile">אזור אישי</Link></li>
@@ -38,6 +39,21 @@ export default function Header() {
             )}
           </li>
           <li className="publish-ad-button"><Link to="/post-ad">+ פרסום מודעה</Link></li>
+        </ul>
+      </nav>
+
+      {/* תפריט צד לסלולרי */}
+      <button className="menu-toggle" onClick={toggleSidebar}>
+        ☰
+      </button>
+      <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
+        <button className="close-button" onClick={toggleSidebar}>✖</button>
+        <ul className="nav-links">
+          <li><Link to="/products" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
+          <li className="publish-ad-button"><Link to="/post-ad" onClick={toggleSidebar}>+ פרסום מודעה</Link></li>
+          <li><Link to="/profile" onClick={toggleSidebar}>אזור אישי</Link></li>
+          <li><Link to="/login-signup" onClick={toggleSidebar}>התחברות</Link></li>
+          <li><Link to="/logout" onClick={toggleSidebar}>התנתק</Link></li>
         </ul>
       </nav>
     </header>
