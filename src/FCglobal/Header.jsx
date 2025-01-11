@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../CSS/Header.css';
 import UserIcon from '../Icons/User-icon.png';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -8,51 +9,35 @@ export default function Header() {
 
   const handleMouseEnter = () => setDropdownVisible(true);
   const handleMouseLeave = () => setDropdownVisible(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   return (
     <header className="fixed-header">
-      <div className="logo">MyWebsite</div>
+      
+      <div className="logo"><Link to="/Home">MyWebsite</Link></div>
+      <nav className="desktop-nav">
       <button className="menu-toggle" onClick={toggleSidebar}>
         ☰
       </button>
-      <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <button className="close-button" onClick={toggleSidebar}>✖</button>
         <ul className="nav-links">
-          <li><a href="#about">המוצרים שלנו</a></li>
-          <li>
-            <a href="#contact">
-              אזור אישי
-              <img className="UserPhoto" src={UserIcon} alt="User Icon" />
-            </a>
-          </li>
-          <li className="publish-ad-button"><a href="#services">+ פרסום מודעה</a></li>
-        </ul>
-      </nav>
-
-      <nav className="desktop-nav">
-        <ul className="nav-links">
-          <li><a href="#about">המוצרים שלנו</a></li>
+          <li><Link to="/ItemDetails">המוצרים שלנו</Link></li>
           <li
-          className="dropdown-wrapper"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          <a href="#contact" className="dropdown-link">
-            <img className="UserPhoto" src={UserIcon} alt="User Icon" />
-          </a>
-          {isDropdownVisible && (
-            <ul className="dropdown-menu">
-              <li><a href="#profile">אזור אישי</a></li>
-              <li><a href="#settings">התחברות</a></li>
-              <li><a href="#logout">התנתק</a></li>
-            </ul>
-          )}
-        </li>
-          <li className="publish-ad-button"><a href="#services">+ פרסום מודעה</a></li>
+            className="dropdown-wrapper"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <Link to="/personal-area" className="dropdown-link">
+              <img className="UserPhoto" src={UserIcon} alt="User Icon" />
+            </Link>
+            {isDropdownVisible && (
+              <ul className="dropdown-menu">
+                <li><Link to="/profile">אזור אישי</Link></li>
+                <li><Link to="/login-signup">התחברות</Link></li>
+                <li><Link to="/logout">התנתק</Link></li>
+              </ul>
+            )}
+          </li>
+          <li className="publish-ad-button"><Link to="/post-ad">+ פרסום מודעה</Link></li>
         </ul>
       </nav>
     </header>
