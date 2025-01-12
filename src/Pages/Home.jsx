@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { AllAdsContext } from '../FCglobal/ContextAllAds';
 import Slider from 'react-slick';
 import '../CSS/Home.css'; // כל הסגנונות יהיו כאן
 import "slick-carousel/slick/slick.css";
@@ -18,13 +19,9 @@ const settings = {
 };
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('');
-
-  const categories = ['רכב', 'דירות', 'טכנולוגיה',];
-  const Ads = [
-    { id: 1, title: 'מודעה 1', category: 'רכב', price: '₪50,000', image: "" },
-    { id: 2, title: 'מודעה 2', category: 'דירות', price: '₪1,200,000', image: '' },
-    { id: 3, title: 'מודעה 3', category: 'טכנולוגיה', price: '₪3,000', image: "" },
-  ];
+    const { allAds } = useContext(AllAdsContext);
+  
+  const categories = [allAds.map(ad=>ad.category)];
 
 
   const handleCategoryChange = (category) => {
@@ -34,7 +31,7 @@ export default function Home() {
   return (
     <div className="home-container">
       <Slider {...settings}>
-        {Ads.map((ad) => (
+        {allAds.map((ad) => (
           <AdDisplay ad={ad} />
         ))}
       </Slider>
@@ -56,7 +53,7 @@ export default function Home() {
 
       {/* רשימת מוצרים לפי הקטגוריה */}
       <div className="product-list">
-        {selectedCategory && Ads.filter((ad) => ad.category === selectedCategory).map((ad) => (
+        {selectedCategory && allAds.filter((ad) => ad.category === selectedCategory).map((ad) => (
           <AdDisplay ad={ad} key={ad.id} />
         ))}
       </div>

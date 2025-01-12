@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../FCglobal/ContextUser';
 import "../CSS/UpdatePersonalDetails.css";
 import MyAccountSidebar from "./MyAccountSidebar";
 
 export default function UpdatePersonalDetails() {
-  const [formData, setFormData] = useState({
-    firstName: "אביתר",
-    lastName: "מקבריט",
-    phone: "053-8272107",
-    email: "evyatar.mt@gmail.com",
-    birthDate: "",
-    city: "",
-    street: "",
-    houseNumber: "",
-  });
+  const { user } = useContext(UserContext);
+
+  const [formData, setFormData] = useState(user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +19,7 @@ export default function UpdatePersonalDetails() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("הפרטים האישיים עודכנו בהצלחה!");
+    console.log(formData)
   };
 
   const handleCancel = () => {

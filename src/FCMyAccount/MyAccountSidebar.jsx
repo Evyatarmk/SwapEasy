@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../FCglobal/ContextUser';
 import '../CSS/MyAccountSidebar.css';
 import UserIcon from '../Icons/User-icon.png';
 import { Link } from 'react-router-dom';
 
 export default function MyAccountSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { user } = useContext(UserContext);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -22,8 +24,8 @@ export default function MyAccountSidebar() {
         </button>
         <div className="user-info">
           <img src={UserIcon} alt="User Icon" className="user-icon" />
-          <h3>אביתר מקבריט</h3>
-          <p>mt@gmail.com</p>
+          <h3> {user.firstName+" "+user.lastName}</h3>
+          <p>{user.email}</p>
         </div>
         <ul className="menu-list">
         <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
@@ -39,8 +41,8 @@ export default function MyAccountSidebar() {
      <div className={`sidebar-container-dev`}>
         <div className="user-info">
           <img src={UserIcon} alt="User Icon" className="user-icon" />
-          <h3>אביתר מקבריט</h3>
-          <p>mt@gmail.com</p>
+          <h3> {user.firstName+" "+user.lastName} </h3>
+          <p>{user.email}</p>
         </div>
         <ul className="menu-list">
           <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>

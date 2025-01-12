@@ -5,7 +5,39 @@ export default function PostAd() {
   const [images, setImages] = useState([]);
   const [productCondition, setProductCondition] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [Ad, setAd] = useState({
+    category: "",
+    title: "",
+    description: "",
+    price: "",
+    pickupLocation: {
+      city: "",
+      street: "",
+      houseNumber: "",
+    },
+  });
 
+  // Handle input change for all fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "city" || name === "street" || name === "houseNumber") {
+      setAd((prevAd) => ({
+        ...prevAd,
+        pickupLocation: {
+          ...prevAd.pickupLocation,
+          [name]: value,
+        },
+      }));
+    } else {
+      setAd((prevAd) => ({
+        ...prevAd,
+        [name]: value,
+      }));
+    }
+  };
+
+  // Handle image uploads
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const filteredFiles = files.filter((file) => !images.some((img) => img.name === file.name));
@@ -24,11 +56,20 @@ export default function PostAd() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
       return;
     }
-    alert(`מודעה נשלחה בהצלחה!\nמצב המוצר: ${productCondition}`);
+
+    // Combine all ad details into a single object
+    const fullAd = {
+      ...Ad,
+      productCondition,
+      images,
+    };
+
+
   };
 
   return (
@@ -38,7 +79,7 @@ export default function PostAd() {
         {/* קטגוריה */}
         <label>
           קטגוריה:
-          <select required>
+          <select name="category" required onChange={handleChange}>
             <option value="">בחר קטגוריה</option>
             <option value="רכב">רכב</option>
             <option value="יד שניה">יד שניה</option>
@@ -50,19 +91,38 @@ export default function PostAd() {
         {/* כותרת */}
         <label>
           כותרת:
-          <input type="text" placeholder="כתוב כותרת למודעה" required />
+          <input
+            type="text"
+            name="title"
+            placeholder="כתוב כותרת למודעה"
+            required
+            onChange={handleChange}
+          />
         </label>
 
         {/* תיאור */}
         <label>
           תיאור:
-          <textarea placeholder="כתוב תיאור מלא למודעה" rows="5" required></textarea>
+          <textarea
+            name="description"
+            placeholder="כתוב תיאור מלא למודעה"
+            rows="5"
+            required
+            onChange={handleChange}
+          ></textarea>
         </label>
 
         {/* מחיר */}
         <label>
           מחיר:
-          <input type="number" placeholder="₪" min="0" required />
+          <input
+            type="number"
+            name="price"
+            placeholder="₪"
+            min="0"
+            required
+            onChange={handleChange}
+          />
         </label>
 
         {/* מצב המוצר */}
@@ -94,19 +154,38 @@ export default function PostAd() {
         <div className="pickup-location">
           <h3>מאיפה אוספים את המוצר?</h3>
           <p className="pickup-description">
-            אנחנו ממליצים שזו תהיה הכתובת בה נמצאים רוב היום (בית או מקום עבודה). אל דאגה, נפרסם רק את העיר ולא את הכתובת המלאה.
+            אנחנו ממליצים שזו תהיה הכתובת בה נמצאים רוב היום (בית או מקום עבודה). אל
+            דאגה, נפרסם רק את העיר ולא את הכתובת המלאה.
           </p>
           <label>
             יישוב:
-            <input type="text" placeholder="שם היישוב" required />
+            <input
+              type="text"
+              name="city"
+              placeholder="שם היישוב"
+              required
+              onChange={handleChange}
+            />
           </label>
           <label>
             רחוב:
-            <input type="text" placeholder="שם הרחוב" required />
+            <input
+              type="text"
+              name="street"
+              placeholder="שם הרחוב"
+              required
+              onChange={handleChange}
+            />
           </label>
           <label>
             מס׳:
-            <input type="text" placeholder="מספר הבית" required />
+            <input
+              type="text"
+              name="houseNumber"
+              placeholder="מספר הבית"
+              required
+              onChange={handleChange}
+            />
           </label>
         </div>
 

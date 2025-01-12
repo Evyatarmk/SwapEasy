@@ -11,6 +11,7 @@ import PostAd from './Pages/PostAd';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
+
   const item = {
     images: [
       "https://via.placeholder.com/300",
@@ -32,8 +33,6 @@ function App() {
   return (
     <>
       <Header />
-
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login-signup" element={<LoginSignup />} />
