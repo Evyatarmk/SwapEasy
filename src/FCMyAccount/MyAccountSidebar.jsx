@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../CSS/MyAccountSidebar.css';
 import UserIcon from '../Icons/User-icon.png';
+import { Link } from 'react-router-dom';
 
 export default function MyAccountSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -12,9 +13,7 @@ export default function MyAccountSidebar() {
   return (
     <>
       {/* כפתור פתיחה - יופיע רק במסכים קטנים */}
-      <button className="menu-toggle-MyAccountSidebar" onClick={toggleSidebar}>
-      
-      </button>
+      <button className="menu-toggle-MyAccountSidebar" onClick={toggleSidebar}></button>
 
       {/* Sidebar */}
       <div className={`sidebar-container ${isSidebarOpen ? 'open' : ''}`}>
@@ -27,15 +26,16 @@ export default function MyAccountSidebar() {
           <p>mt@gmail.com</p>
         </div>
         <ul className="menu-list">
-          <li><a href="#my-ads">המודעות שלי</a></li>
-          <li><a href="#update-info">עדכון פרטים</a></li>
-          <li><a href="#saved-ads">מודעות שמורות</a></li>
-          <li><a href="#recent-searches">חיפושים אחרונים</a></li>
-          <li><a href="#tips">טיפים ומידע</a></li>
+        <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
+          <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
+          <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
+          <li><Link to="/MyAccount">חיפושים אחרונים</Link></li>
+          <li><Link to="/MyAccount">טיפים ומידע</Link></li>
         </ul>
       </div>
-      <nav className="desktop-nav">
+
      {/* Sidebar */}
+      <nav className="desktop-nav">
      <div className={`sidebar-container-dev`}>
         <div className="user-info">
           <img src={UserIcon} alt="User Icon" className="user-icon" />
@@ -43,11 +43,11 @@ export default function MyAccountSidebar() {
           <p>mt@gmail.com</p>
         </div>
         <ul className="menu-list">
-          <li><a href="#my-ads">המודעות שלי</a></li>
-          <li><a href="#update-info">עדכון פרטים</a></li>
-          <li><a href="#saved-ads">מודעות שמורות</a></li>
-          <li><a href="#recent-searches">חיפושים אחרונים</a></li>
-          <li><a href="#tips">טיפים ומידע</a></li>
+          <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
+          <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
+          <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
+          <li><Link to="/MyAccount">חיפושים אחרונים</Link></li>
+          <li><Link to="/MyAccount">טיפים ומידע</Link></li>
         </ul>
       </div>
       </nav>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../CSS/UpdatePersonalDetails.css";
+import MyAccountSidebar from "./MyAccountSidebar";
 
 export default function UpdatePersonalDetails() {
   const [formData, setFormData] = useState({
@@ -32,6 +33,8 @@ export default function UpdatePersonalDetails() {
   };
 
   return (
+    <>
+    <MyAccountSidebar />
     <div className="update-details-container">
       <h2>עדכון פרטים</h2>
       <form onSubmit={handleSubmit} className="update-details-form">
@@ -150,5 +153,6 @@ export default function UpdatePersonalDetails() {
         </div>
       </form>
     </div>
+    </>
   );
 }

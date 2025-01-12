@@ -1,6 +1,7 @@
 /* Container for the Saved Ads Page */
 .saved-ads-container {
-  margin: 20px auto;
+  margin-top: 60px;
+  margin-right: 250px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
@@ -24,9 +25,11 @@
 }
 
 /* Responsive Design for Mobile */
-@media (max-width: 480px) {
+@media (max-width: 769px) {
   .saved-ads-container {
     padding: 10px;
+    margin-right: 0px;
+
   }
 
   .saved-ads-container h2 {

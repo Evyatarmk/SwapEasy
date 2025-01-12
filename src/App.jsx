@@ -6,6 +6,7 @@ import SavedAds from './FCMyAccount/SavedAds';
 import UpdatePersonalDetails from './FCMyAccount/UpdatePersonalDetails';
 import Home from './Pages/Home';
 import ItemDetails from './Pages/ItemDetails';
+import MyAccount from './Pages/MyAccount';
 import PostAd from './Pages/PostAd';
 import { Routes, Route } from 'react-router-dom';
 
@@ -31,14 +32,17 @@ function App() {
   return (
     <>
       <Header />
+
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login-signup" element={<LoginSignup />} />
         <Route path="/post-ad" element={<PostAd />} />
-        <Route path="/my-ads" element={<MyAds />} />
-        <Route path="/saved-ads" element={<SavedAds />} />
-        <Route path="/update-personal-details" element={<UpdatePersonalDetails />} />
         <Route path="/item-details" element={<ItemDetails item={item} />} />
+        <Route path="/MyAccount" element={<MyAccount />} />
+        <Route path="/MyAccount/my-ads" element={<MyAds />} />
+        <Route path="/MyAccount/saved-ads" element={<SavedAds />} />
+        <Route path="/MyAccount/update-personal-details" element={<UpdatePersonalDetails />} /> 
       </Routes>
     </>
   );

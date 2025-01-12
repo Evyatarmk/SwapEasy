@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import "../CSS/MyAds.css";
+import MyAccountSidebar from "./MyAccountSidebar";
 
 
 export default function MyAds() {
@@ -30,6 +31,8 @@ export default function MyAds() {
 
   return (
     <div>
+      <MyAccountSidebar />
+
       {/* מודעות שלי */}
       <div className="ads-section">
         <h3>המודעות שלי</h3>

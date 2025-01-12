@@ -15,13 +15,13 @@ export default function Header() {
     <header className="fixed-header">
       {/* לוגו */}
       <div className="logo">
-        <Link to="/Home">MyWebsite</Link>
+        <Link to="/">MyWebsite</Link>
       </div>
 
       {/* ניווט דסקטופ */}
       <nav className="desktop-nav">
         <ul className="nav-links">
-          <li><Link to="/products">המוצרים שלנו</Link></li>
+          <li><Link to="/">המוצרים שלנו</Link></li>
           <li
             className="dropdown-wrapper"
             onMouseEnter={handleMouseEnter}
@@ -32,7 +32,7 @@ export default function Header() {
             </span>
             {isDropdownVisible && (
               <ul className="dropdown-menu">
-                <li><Link to="/profile">אזור אישי</Link></li>
+                <li><Link to="/MyAccount">אזור אישי</Link></li>
                 <li><Link to="/login-signup">התחברות</Link></li>
                 <li><Link to="/logout">התנתק</Link></li>
               </ul>
@@ -49,9 +49,9 @@ export default function Header() {
       <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-button" onClick={toggleSidebar}>✖</button>
         <ul className="nav-links">
-          <li><Link to="/products" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
+          <li><Link to="/" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
           <li className="publish-ad-button"><Link to="/post-ad" onClick={toggleSidebar}>+ פרסום מודעה</Link></li>
-          <li><Link to="/profile" onClick={toggleSidebar}>אזור אישי</Link></li>
+          <li><Link to="/MyAccount" onClick={toggleSidebar}>אזור אישי</Link></li>
           <li><Link to="/login-signup" onClick={toggleSidebar}>התחברות</Link></li>
           <li><Link to="/logout" onClick={toggleSidebar}>התנתק</Link></li>
         </ul>
