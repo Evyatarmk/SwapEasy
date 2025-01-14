@@ -15,14 +15,13 @@ const settings = {
   infinite: true,
   speed: 500,
   slidesToShow: 2,
-
 };
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState('');
     const { allAds } = useContext(AllAdsContext);
   
-  const categories = [allAds.map(ad=>ad.category)];
-
+  const categories = [...new Set(allAds.map(ad=>ad.category))];
+  console.log(categories)
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);

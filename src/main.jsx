@@ -4,14 +4,17 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './FCglobal/ContextUser.jsx'
+import { AllAdsProvider } from './FCglobal/ContextAllAds.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-  <UserProvider>
-   <StrictMode>
-    <App />
-  </StrictMode>
-  </UserProvider>
+    <UserProvider>
+      <AllAdsProvider>
+        <StrictMode>
+          <App />
+        </StrictMode>
+      </AllAdsProvider>
+    </UserProvider>
   </BrowserRouter>
- 
+
 )
