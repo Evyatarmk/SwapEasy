@@ -1,8 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../CSS/FilterBar.css";
 import Select from 'react-select';
+import { AllAdsContext } from '../FCglobal/ContextAllAds';
 
-export default function FilterBar({ onFilterChange }) {
+export default function FilterBar(props) {
+  const { allAds } = useContext(AllAdsContext);
+  const categories = [...new Set(allAds.map(ad=>ad.category))];
+   const [selectedCategory, setSelectedCategory] = useState(categories[categories.length-1]);
+   useEffect(() => {
+    const filteredAds = allAds.filter((ad) => ad.category === selectedCategory);
+    props.sendAdsToParent(filteredAds); // Send filtered ads to the parent
+   },[])
+   
+   const handleCategoryChange = (category) => {
+      setSelectedCategory(category);
+      let adsToSend = allAds.filter((ad) => ad.category === category); // Use strict equality (===)
+      // Send the filtered ads to the parent component
+      props.sendAdsToParent(adsToSend);
+    };
+  
   const [filters, setFilters] = useState({
     city: "",
     saleType: "",
@@ -38,10 +54,26 @@ export default function FilterBar({ onFilterChange }) {
   const handleCityChange = (selectedOptions) => {
     setSelectedCities(selectedOptions || []);
   } 
-
+  const filterAds = () => {
+   
+  };
 
   
   return (
+     <>
+     {/* סרגל קטגוריות */}
+     <div className="category-bar">
+     {categories.map((category) => (
+       <button
+         key={category}
+         className={`category-btn ${selectedCategory === category ? 'selected' : ''}`}
+         onClick={() => handleCategoryChange(category)}
+         >
+         {category}
+       </button>
+     ))}
+   </div>
+   {/* סרגל סינון */}
     <div className="filter-bar">
       <Select
        isMulti
@@ -62,7 +94,7 @@ export default function FilterBar({ onFilterChange }) {
           onChange={handleInputChange}
           placeholder="מחיר מינימום"
           className="filter-input"
-        />
+          />
         <input
           type="number"
           name="maxPrice"
@@ -70,12 +102,12 @@ export default function FilterBar({ onFilterChange }) {
           onChange={handleInputChange}
           placeholder="מחיר מקסימום"
           className="filter-input"
-        />
+          />
       </div>
 
       <Select
        isMulti
-      styles={customStyles}
+       styles={customStyles}
        options={conditionOptions}
        placeholder="בחר מצב מוצר"
        onChange={handleCityChange}
@@ -89,11 +121,12 @@ export default function FilterBar({ onFilterChange }) {
         onChange={handleInputChange}
         placeholder="חיפוש חופשי"
         className="filter-input"
-      />
-      <button className='filter-button'>
+        />
+      <button className='filter-button' onClick={filterAds}>
         סנן
       </button>
     </div>
+</>
   );
 }
 const customStyles = {

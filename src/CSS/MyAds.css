@@ -1,13 +1,12 @@
 .ads-section {
   margin-top: 60px;
-  margin-right:  250px;
+  margin-right: 250px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  width: 100%;
-  direction: rtl;
+  max-width: 900px;
+
 }
 
 .ads-section h3 {
@@ -18,6 +17,7 @@
 }
 
 .ads-table {
+  margin-right:  250px;
   width: 100%;
   border-collapse: collapse;
 }

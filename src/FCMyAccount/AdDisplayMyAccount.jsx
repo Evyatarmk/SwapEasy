@@ -1,9 +1,7 @@
-import haertIcon from '../Icons/heart.png';
-import heartEmptyIcon from '../Icons/heartEmpty.png';
-import '../CSS/AdHomeDisplay.css'
+import '../CSS/AdDisplayMyAccount.css'
 import { useNavigate } from 'react-router-dom';
 
-export default function AdDisplay(props) {
+export default function AdDisplayMyAccount(props) {
   const ad = props.ad;
   const navigate = useNavigate();
 
@@ -14,7 +12,7 @@ export default function AdDisplay(props) {
     <div className="container-ad" key={ad.id} onClick={goToAdDetails}>
       <div className="ad-info">
         <div className="ad-info-header">
-          <img className="haert-button" src={heartEmptyIcon} />
+          <img className="haert-button"  />
           <p className="price">₪ {ad.price}</p>
         </div>
         <h3>{ad.title}</h3>

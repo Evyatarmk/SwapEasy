@@ -1,0 +1,82 @@
+.ad-details-container {
+  margin: 65px;
+  background: #fff;
+  border-radius: 10px;
+  direction: rtl;
+  text-align: right;
+}
+
+.ad-images {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.ad-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.ad-details h2 {
+  display: inline;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.ad-details p {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #555;
+}
+
+.ad-details p strong {
+  color: #333;
+}
+
+.ad-description {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* דף כל התמונות */
+.all-images-container{
+  margin: 65px;
+  display: flex;
+  flex-direction: column;
+}
+.back-button {
+  width:20%;
+  background: #f0a500;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background: #d68e00;
+}
+
+.all-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+.all-image {
+  width:100%;
+  object-fit:cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}

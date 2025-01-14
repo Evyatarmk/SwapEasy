@@ -17,42 +17,29 @@ const settings = {
   slidesToShow: 2,
 };
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState('');
-    const { allAds } = useContext(AllAdsContext);
-  
-  const categories = [...new Set(allAds.map(ad=>ad.category))];
-  console.log(categories)
-
-  const handleCategoryChange = (category) => {
-    setSelectedCategory(category);
-  };
+    const [adsToShow, setAdsToShow] = useState();
+  const updateAdsToShow=(ads)=>{
+    setAdsToShow(ads)
+   
+  }
+ const { allAds } = useContext(AllAdsContext);
+ 
 
   return (
     <div className="home-container">
       <Slider {...settings}>
         {allAds.map((ad) => (
-          <AdDisplay ad={ad} />
+          <AdDisplay ad={ad} key={ad.id} />
         ))}
       </Slider>
 
-      {/* סרגל קטגוריות */}
-      <div className="category-bar">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={`category-btn ${selectedCategory === category ? 'selected' : ''}`}
-            onClick={() => handleCategoryChange(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+    
       {/* סרגל סינון */}
-    <FilterBar/>
+    <FilterBar sendAdsToParent={updateAdsToShow}/>
 
       {/* רשימת מוצרים לפי הקטגוריה */}
       <div className="product-list">
-        {selectedCategory && allAds.filter((ad) => ad.category === selectedCategory).map((ad) => (
+        {adsToShow && adsToShow.map((ad,index) => (
           <AdDisplay ad={ad} key={ad.id} />
         ))}
       </div>
