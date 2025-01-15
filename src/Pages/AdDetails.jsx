@@ -2,13 +2,17 @@ import React, { useContext, useState } from "react";
 import "../CSS/AdDetails.css";
 import { useParams } from "react-router-dom";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
+import haertIcon from '../Icons/heart.png';
+import heartEmptyIcon from '../Icons/heartEmpty.png';
+import { UserContext } from "../FCglobal/ContextUser";
 
 export default function adDetails() {
   const [showAllImages, setShowAllImages] = useState(false);
   const { adId } = useParams();
   const { getAd } = useContext(AllAdsContext);
+  const { user } = useContext(UserContext);
+  
   const ad=getAd(adId);
-console.log(ad)
 if (!ad) {
   return <p>Ad not found</p>; // Handle case where ad is not found
 }
@@ -58,6 +62,7 @@ if (!ad) {
           </button>
       </div>
 
+      <img className="haert-button" src={user.savedAd.includes(ad.id)?haertIcon:heartEmptyIcon}/>
       {/* פרטי הפריט */}
       <div className="ad-details">
         <h2>{ad.title}</h2>

@@ -80,3 +80,10 @@
   border-radius: 5px;
   border: 1px solid #ddd;
 }
+.haert-button  {
+  cursor: pointer;
+  height: 25px;
+  padding: 0;
+  float: left; 
+
+}
