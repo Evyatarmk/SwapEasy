@@ -54,7 +54,7 @@ export default function PostAd() {
     setErrorMessage(""); // Reset error message when a condition is selected
   };
 
-  const handleSubmit = (e) => {
+  const  handleSubmit = (e) => {
     e.preventDefault();
 
     if (!productCondition) {
@@ -68,8 +68,7 @@ export default function PostAd() {
       productCondition,
       images,
     };
-
-
+    
   };
 
   return (

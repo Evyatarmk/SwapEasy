@@ -17,32 +17,32 @@ const settings = {
   slidesToShow: 2,
 };
 export default function Home() {
-    const [adsToShow, setAdsToShow] = useState();
-  const updateAdsToShow=(ads)=>{
+  const [adsToShow, setAdsToShow] = useState();
+  const updateAdsToShow = (ads) => {
     setAdsToShow(ads)
-   
+
   }
- const { allAds } = useContext(AllAdsContext);
- 
+  const { allAds } = useContext(AllAdsContext);
+   
 
-  return (
-    <div className="home-container">
-      <Slider {...settings}>
-        {allAds.map((ad) => (
-          <AdDisplay ad={ad} key={ad.id} />
-        ))}
-      </Slider>
 
-    
-      {/* סרגל סינון */}
-    <FilterBar sendAdsToParent={updateAdsToShow}/>
+return (
+  <div className="home-container">
+    <Slider {...settings}>
+      {allAds.map((ad) => (
+        <AdDisplay ad={ad} key={ad.id} />
+      ))}
+    </Slider>
 
-      {/* רשימת מוצרים לפי הקטגוריה */}
-      <div className="product-list">
-        {adsToShow && adsToShow.map((ad,index) => (
-          <AdDisplay ad={ad} key={ad.id} />
-        ))}
-      </div>
+    {/* סרגל סינון */}
+    <FilterBar sendAdsToParent={updateAdsToShow} />
+
+    {/* רשימת מוצרים לפי הקטגוריה */}
+    <div className="product-list">
+      {adsToShow && adsToShow.map((ad, index) => (
+        <AdDisplay ad={ad} key={ad.id} />
+      ))}
     </div>
-  );
+  </div>
+);
 }

@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import '../CSS/SavedAds.css';
 import AdHomeDisplay from '../FCglobal/AdDisplay';
 import MyAccountSidebar from './MyAccountSidebar';
+import { UserContext } from '../FCglobal/ContextUser';
+import { AllAdsContext } from '../FCglobal/ContextAllAds';
 
 export default function SavedAds() {
-  // כאן אפשר להכניס את המודעות ששמרת, לדוגמה:
-  const savedAds = [
-    { id: 1, title: 'מודעה 1', category: 'רכב', price: '₪50,000', image: "" },
-    { id: 2, title: 'מודעה 2', category: 'דירות', price: '₪1,200,000', image: '' },
-    { id: 3, title: 'מודעה 3', category: 'טכנולוגיה', price: '₪3,000', image: "" },
-  ];
+  
+ const { allAds } = useContext(AllAdsContext);
+  const { user } = useContext(UserContext);
 
+ const [savedAds, setSavedAds] = useState(
+  allAds.filter((ad) => user.savedAd.includes(ad.id))
+ );
   return (
     <>
       <MyAccountSidebar />
@@ -18,7 +20,7 @@ export default function SavedAds() {
         <h2>המודעות השמורות שלי</h2>
         <div className="saved-ads-list">
           {savedAds.map((ad) => (
-            <AdHomeDisplay ad={ad} />
+            <AdHomeDisplay ad={ad} key={ad.id}/>
           ))}
         </div>
       </div>

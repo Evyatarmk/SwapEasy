@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import '../CSS/LoginSignup.css';
-
 export default function LoginSignup() {
   const [isLogin, setIsLogin] = useState(true);
   const [User, setUser] = useState({
@@ -42,6 +41,7 @@ export default function LoginSignup() {
   // Sign-up a new user
   const signUp = async (event) => {
     
+  
   };
   
 

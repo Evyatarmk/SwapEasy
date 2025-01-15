@@ -31,8 +31,7 @@ export default function MyAccountSidebar() {
         <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
           <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
           <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
-          <li><Link to="/MyAccount">חיפושים אחרונים</Link></li>
-          <li><Link to="/MyAccount">טיפים ומידע</Link></li>
+
         </ul>
       </div>
 
@@ -48,8 +47,7 @@ export default function MyAccountSidebar() {
           <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
           <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
           <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
-          <li><Link to="/MyAccount">חיפושים אחרונים</Link></li>
-          <li><Link to="/MyAccount">טיפים ומידע</Link></li>
+  
         </ul>
       </div>
       </nav>

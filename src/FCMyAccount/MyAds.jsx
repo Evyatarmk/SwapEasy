@@ -4,7 +4,8 @@ import "../CSS/MyAds.css";
 import MyAccountSidebar from "./MyAccountSidebar";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import { UserContext } from "../FCglobal/ContextUser";
-import AdDisplayMyAccount from "./AdDisplayMyAccount";
+import AdDisplaySavedAds from "./AdDisplayMyAds";
+import AdDisplayMyAds from "./AdDisplayMyAds";
 
 
 export default function MyAds() {
@@ -27,7 +28,7 @@ export default function MyAds() {
       {/* מודעות שלי */}
       <div className="ads-section">
             {myAds.map((ad) => (
-              <AdDisplayMyAccount ad={ad} key={ad.id}/>
+              <AdDisplayMyAds ad={ad} key={ad.id}/>
             ))}
             </div>
     </div>
