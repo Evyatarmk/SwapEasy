@@ -1,36 +1,35 @@
-
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../CSS/MyAds.css";
 import MyAccountSidebar from "./MyAccountSidebar";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import { UserContext } from "../FCglobal/ContextUser";
-import AdDisplaySavedAds from "./AdDisplayMyAds";
 import AdDisplayMyAds from "./AdDisplayMyAds";
-
+import UpdateAd from "./UpdateAd";
 
 export default function MyAds() {
- const { allAds } = useContext(AllAdsContext);
+  const { allAds } = useContext(AllAdsContext);
   const { user } = useContext(UserContext);
 
- const [myAds, setmyAds] = useState(
-  allAds.filter((ad) => user.myAds.includes(ad.id))
- );
-    
+  const [myAds, setMyAds] = useState([]);
 
-  const handleEditDetails = () => {
-    alert("אפשרות עריכת פרטים תהיה זמינה בקרוב!");
-  };
+  useEffect(() => {
+    if (user?.myAds && allAds?.length) {
+      setMyAds(allAds.filter((ad) => user.myAds.includes(ad.id)));
+    }
+  }, [allAds, user]);
+
+
 
   return (
-    <div>
+    <div className="my-ads-container">
       <MyAccountSidebar />
-
-      {/* מודעות שלי */}
-      <div className="ads-section">
-            {myAds.map((ad) => (
-              <AdDisplayMyAds ad={ad} key={ad.id}/>
-            ))}
-            </div>
+        <div className="ads-section">
+          {myAds.length > 0 ? (
+            myAds.map((ad) => <AdDisplayMyAds ad={ad} key={ad.id} send/>)
+          ) : (
+            <p className="no-ads-message">You don’t have any ads yet.</p>
+          )}
+        </div>
     </div>
   );
 }

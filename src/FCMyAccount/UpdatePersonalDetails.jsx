@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from '../FCglobal/ContextUser';
 import "../CSS/UpdatePersonalDetails.css";
 import MyAccountSidebar from "./MyAccountSidebar";
+import { PopupContext } from '../FCglobal/Popup';
 
 export default function UpdatePersonalDetails() {
   const { user } = useContext(UserContext);
+  const { showPopup } = useContext(PopupContext);
 
   const [formData, setFormData] = useState(user);
 
@@ -18,8 +20,14 @@ export default function UpdatePersonalDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("הפרטים האישיים עודכנו בהצלחה!");
-    console.log(formData)
+    showPopup('?לעדכן את הפרופיל ', (result) => {
+      if (result) {
+        alert('User clicked Yes!');
+      } else {
+        alert('User clicked No!');
+      }
+    });
+
   };
 
   const handleCancel = () => {

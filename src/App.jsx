@@ -9,6 +9,7 @@ import ItemDetails from './Pages/AdDetails';
 import MyAccount from './Pages/MyAccount';
 import PostAd from './Pages/PostAd';
 import { Routes, Route } from 'react-router-dom';
+import UpdateAd from './FCMyAccount/UpdateAd';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
         <Route path="/MyAccount/my-ads" element={<MyAds />} />
         <Route path="/MyAccount/saved-ads" element={<SavedAds />} />
         <Route path="/MyAccount/update-personal-details" element={<UpdatePersonalDetails />} /> 
+        <Route path="/MyAccount/update-Ad" element={<UpdateAd />} /> 
       </Routes>
     </>
   );

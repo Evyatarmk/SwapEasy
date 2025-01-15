@@ -10,9 +10,9 @@ export const AllAdsProvider = ({ children }) => {
       id: 1,
       title: "Brand New Laptop for Sale",
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
-      category: "מכונית",
+      category: "רכב",
       price: 800,
-      condition: "New",
+      condition: "חדש באריזה",
    
         city: "New York",
         street: "Main Street",
@@ -30,7 +30,7 @@ export const AllAdsProvider = ({ children }) => {
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
       category: "נדלן",
       price: 333,
-      condition: "New",
+      condition: "חדש באריזה",
 
       city: "New York",
       street: "Main Street",
@@ -48,7 +48,7 @@ export const AllAdsProvider = ({ children }) => {
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
       category: "יד שנייה",
       price: 333,
-      condition: "New",
+      condition: "חדש באריזה",
 
       city: "New York",
       street: "Main Street",

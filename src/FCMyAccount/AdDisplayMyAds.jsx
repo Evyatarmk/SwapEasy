@@ -1,35 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../CSS/AdDisplayMyAds.css';
 import { useNavigate } from 'react-router-dom';
 import editIcon from '../Icons/edit.png';
 import deleteIcon from '../Icons/delete.png';
+import { PopupContext } from '../FCglobal/Popup';
 
 export default function AdDisplayMyAds({ ad }) {
   const navigate = useNavigate();
-  const [showOptions, setShowOptions] = useState(false);
+  const { showPopup } = useContext(PopupContext);
 
   const goToAdDetails = () => {
     navigate(`/ad-details/${ad.id}`);
   };
 
-  const handleMouseEnter = () => {
-    setShowOptions(true); // פותח את התפריט כאשר העכבר עובר מעל כפתור האפשרויות
-  };
-
-  const handleMouseLeave = () => {
-    setShowOptions(false); // סוגר את התפריט כאשר העכבר יוצא מכפתור האפשרויות
-  };
-
   const handleEdit = (e) => {
     e.stopPropagation();
-    console.log(`Editing ad with ID: ${ad.id}`);
-    // הוספת לוגיקה לעריכה
+    navigate('/MyAccount/update-Ad',{state:{ad:ad}});
   };
 
   const handleDelete = (e) => {
     e.stopPropagation();
-    console.log(`Deleting ad with ID: ${ad.id}`);
-    // הוספת לוגיקה למחיקה
+    showPopup('?האם למחוק את המודעה', (result) => {
+      if (result) {
+        alert('User clicked Yes!');
+      } else {
+        alert('User clicked No!');
+      }
+    });
   };
 
   return (
