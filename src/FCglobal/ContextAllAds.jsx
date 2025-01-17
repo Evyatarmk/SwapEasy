@@ -5,16 +5,15 @@ import { getAllAds } from '../apicalls/GetAllAds';
 export const AllAdsContext = createContext();
 
 export const AllAdsProvider = ({ children }) => {
-<<<<<<< Updated upstream
   // State to hold the array of users
   const [allAds, setAllAds] = useState([
     {
       id: 1,
       title: "Brand New Laptop for Sale",
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
-      category: "רכב",
+      category: "מכונית",
       price: 800,
-      condition: "חדש באריזה",
+      condition: "New",
    
         city: "New York",
         street: "Main Street",
@@ -32,7 +31,7 @@ export const AllAdsProvider = ({ children }) => {
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
       category: "נדלן",
       price: 333,
-      condition: "חדש באריזה",
+      condition: "New",
 
       city: "New York",
       street: "Main Street",
@@ -50,38 +49,19 @@ export const AllAdsProvider = ({ children }) => {
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
       category: "יד שנייה",
       price: 333,
-      condition: "חדש באריזה",
-=======
-  const [allAds, setAllAds] = useState([]); 
-  const [loading, setLoading] = useState(true); // State to track loading status
-  const [error, setError] = useState(null); // State to track errors
+      condition: "New",
 
-  // Function to fetch ads from the API
-  const fetchAllAds = async () => {
-    try {
-      setLoading(true);
-      setError(null);
->>>>>>> Stashed changes
-
-      const response = await getAllAds('https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads'); 
-      
-      if (!response.ok) {
-        throw new Error(`Error fetching ads: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setAllAds(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Fetch ads when the component mounts
-  useEffect(() => {
-    fetchAllAds();
-  }, []);
+      city: "New York",
+      street: "Main Street",
+      houseNumber: 33,
+      sellerContact:'fff',
+      sellerName:'hhhh',
+      images: [
+        "https://example.com/photos/laptop1.jpg",
+        "https://example.com/photos/laptop2.jpg"
+      ]
+    },
+  ]);
 
   // Function to add a new ad
   const addNewAd = (ad) => {
