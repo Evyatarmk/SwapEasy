@@ -17,12 +17,8 @@ export const AllAdsProvider = ({ children }) => {
       setError(null);
 
       const response = await getAllAds('https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads'); // Replace with your API endpoint
-      if (!response.ok) {
-        throw new Error(`Error fetching ads: ${response.statusText}`);
-      }
-
-      const data = await response.json();
-      setAllAds(data);
+    const ads = response.body;
+    setAllAds(ads);
     } catch (err) {
       setError(err.message);
     } finally {
