@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { getAllAds } from '../apicalls/GetAllAds';
 
 // Create a Context for the ads
 export const AllAdsContext = createContext();
@@ -11,9 +10,9 @@ export const AllAdsProvider = ({ children }) => {
       id: 1,
       title: "Brand New Laptop for Sale",
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
-      category: "מכונית",
+      category: "רכב",
       price: 800,
-      condition: "New",
+      condition: "חדש באריזה",
    
         city: "New York",
         street: "Main Street",
@@ -49,7 +48,7 @@ export const AllAdsProvider = ({ children }) => {
       description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
       category: "יד שנייה",
       price: 333,
-      condition: "New",
+      condition: "חדש באריזה",
 
       city: "New York",
       street: "Main Street",
@@ -75,7 +74,7 @@ export const AllAdsProvider = ({ children }) => {
 
   // Function to get an ad by ID
   const getAd = (id) => {
-    return allAds.find((ad) => ad.id === id);
+    return allAds.find((ad) => ad.id == id);
   };
 
   // Function to update an ad
@@ -88,7 +87,7 @@ export const AllAdsProvider = ({ children }) => {
   };
 
   return (
-    <AllAdsContext.Provider value={{ allAds, getAd, addNewAd, removeAd, updateAd, loading, error }}>
+    <AllAdsContext.Provider value={{ allAds, getAd, addNewAd, removeAd, updateAd }}>
       {children}
     </AllAdsContext.Provider>
   );

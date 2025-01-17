@@ -5,7 +5,7 @@ import MyAds from './FCMyAccount/MyAds';
 import SavedAds from './FCMyAccount/SavedAds';
 import UpdatePersonalDetails from './FCMyAccount/UpdatePersonalDetails';
 import Home from './Pages/Home';
-import ItemDetails from './Pages/AdDetails';
+import AdDetails from './Pages/AdDetails';
 import MyAccount from './Pages/MyAccount';
 import PostAd from './Pages/PostAd';
 import { Routes, Route } from 'react-router-dom';
@@ -38,7 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login-signup" element={<LoginSignup />} />
         <Route path="/post-ad" element={<PostAd />} />
-        <Route path="/ad-details/:adId" element={<ItemDetails/>} />
+        <Route path="/ad-details/:adId" element={<AdDetails/>} />
         <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/MyAccount/my-ads" element={<MyAds />} />
         <Route path="/MyAccount/saved-ads" element={<SavedAds />} />

@@ -48,7 +48,7 @@ export default function FilterBar(props) {
     { value: 'eilat', label: 'אילת' },
   ];
   const conditionOptions = [
-    { value: 'new-in-box', label: 'חדש באריזה' },
+    { value: 'חדש באריזה', label: 'חדש באריזה' },
     { value: 'like-new', label: 'כמו חדש' },
     { value: 'used', label: 'משומש' },
     { value: 'needs-repair', label: 'נדרש תיקון' },
@@ -93,7 +93,7 @@ export default function FilterBar(props) {
         // Check if condition matches (or if no conditions are selected, include all)
         const isConditionMatch =
           filters.conditions.length === 0 || filters.conditions.includes(ad.condition);
-    
+         console.log(ad)
         // Check if search term matches title or description
         const isSearchMatch = 
           !filters.search || 

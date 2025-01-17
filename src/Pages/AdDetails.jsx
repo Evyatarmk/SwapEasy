@@ -11,8 +11,9 @@ export default function adDetails() {
   const { adId } = useParams();
   const { getAd } = useContext(AllAdsContext);
   const { user } = useContext(UserContext);
+  const [ad, setAd] = useState(getAd(adId));
   
-  const ad=getAd(adId);
+  
 if (!ad) {
   return <p>Ad not found</p>; // Handle case where ad is not found
 }
