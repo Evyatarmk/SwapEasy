@@ -3,10 +3,22 @@ import "../CSS/FilterBar.css";
 import Select from 'react-select';
 import { AllAdsContext } from '../FCglobal/ContextAllAds';
 
+
 export default function FilterBar(props) {
-  const { allAds } = useContext(AllAdsContext);
+
+  const { allAds, loading, error } = useContext(AllAdsContext);
   const categories = [...new Set(allAds.map(ad=>ad.category))];
    const [selectedCategory, setSelectedCategory] = useState(categories[categories.length-1]);
+   
+   if (loading) {
+    return <p>Loading ads...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+
    useEffect(() => {
     const filteredAds = allAds.filter((ad) => ad.category === selectedCategory);
     props.sendAdsToParent(filteredAds); // Send filtered ads to the parent
