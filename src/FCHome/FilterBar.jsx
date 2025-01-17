@@ -23,23 +23,22 @@ export default function FilterBar(props) {
     const filteredAds = allAds.filter((ad) => ad.category === selectedCategory);
     props.sendAdsToParent(filteredAds); // Send filtered ads to the parent
    },[])
-   
+
    const handleCategoryChange = (category) => {
       setSelectedCategory(category);
       let adsToSend = allAds.filter((ad) => ad.category === category); // Use strict equality (===)
       // Send the filtered ads to the parent component
       props.sendAdsToParent(adsToSend);
     };
-  
+ 
   const [filters, setFilters] = useState({
-    city: "",
+    Cities: [],
     saleType: "",
     minPrice: "",
     maxPrice: "",
-    condition: "",
+    conditions: [],
     search: "",
   });
-  const [selectedCities, setSelectedCities] = useState([]);
 
   const cityOptions = [
     { value: 'tel-aviv', label: 'תל אביב' },
@@ -61,13 +60,59 @@ export default function FilterBar(props) {
       ...prevFilters,
       [name]: value,
     }));
-    onFilterChange({ ...filters, [name]: value });
+    setFilters({ ...filters, [name]: value });
   };
   const handleCityChange = (selectedOptions) => {
-    setSelectedCities(selectedOptions || []);
+    let newFilters={...filters,Cities:[...selectedOptions]}
+    setFilters(newFilters)
   } 
-  const filterAds = () => {
-   
+  const handleConditionChange = (selectedOptions) => {
+    let newFilters={...filters,conditions:[...selectedOptions]}
+    setFilters(newFilters)
+    console.log(newFilters)
+  }
+
+    const filterAds = () => {
+      const filteredAds = allAds.filter((ad) => {
+        // Check if category matches
+        const isCategoryMatch = ad.category === selectedCategory;
+    
+        // Check if city matches (or if no cities are selected, include all)
+        const isCityMatch =
+          filters.Cities.length === 0 || filters.Cities.includes(ad.city);
+    
+        // Check if sale type matches (or if no sale type is selected, include all)
+        const isSaleTypeMatch = 
+          !filters.saleType || ad.saleType === filters.saleType;
+    
+        // Check if price is within range
+        const isPriceMatch =
+          (!filters.minPrice || ad.price >= parseFloat(filters.minPrice)) &&
+          (!filters.maxPrice || ad.price <= parseFloat(filters.maxPrice));
+    
+        // Check if condition matches (or if no conditions are selected, include all)
+        const isConditionMatch =
+          filters.conditions.length === 0 || filters.conditions.includes(ad.condition);
+    
+        // Check if search term matches title or description
+        const isSearchMatch = 
+          !filters.search || 
+          ad.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+          ad.description.toLowerCase().includes(filters.search.toLowerCase());
+    
+        // Return ads that match all conditions
+        return (
+          isCategoryMatch &&
+          isCityMatch &&
+          isSaleTypeMatch &&
+          isPriceMatch &&
+          isConditionMatch &&
+          isSearchMatch
+        );
+      });
+    
+      // Send the filtered ads to the parent component
+      props.sendAdsToParent(filteredAds);
   };
 
   
@@ -122,7 +167,7 @@ export default function FilterBar(props) {
        styles={customStyles}
        options={conditionOptions}
        placeholder="בחר מצב מוצר"
-       onChange={handleCityChange}
+       onChange={handleConditionChange}
        >
       </Select>
 
