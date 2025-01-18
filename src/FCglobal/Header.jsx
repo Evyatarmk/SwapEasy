@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../CSS/Header.css';
 import UserIcon from '../Icons/User-icon.png';
 
-export default function Header() {
+export default function Header({ isAdmin }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -13,12 +13,12 @@ export default function Header() {
 
   return (
     <header className="fixed-header">
-      {/* לוגו */}
+      {/* Logo */}
       <div className="logo">
         <Link to="/">MyWebsite</Link>
       </div>
 
-      {/* ניווט דסקטופ */}
+      {/* Desktop Navigation */}
       <nav className="desktop-nav">
         <ul className="nav-links">
           <li><Link to="/">המוצרים שלנו</Link></li>
@@ -39,10 +39,12 @@ export default function Header() {
             )}
           </li>
           <li className="publish-ad-button"><Link to="/post-ad">+ פרסום מודעה</Link></li>
+          {/* Admin Button */}
+          {isAdmin && <li className="admin-button"><Link to="/AdminPage">Admin Dashboard</Link></li>}
         </ul>
       </nav>
 
-      {/* תפריט צד לסלולרי */}
+      {/* Mobile Sidebar */}
       <button className="menu-toggle" onClick={toggleSidebar}>
         ☰
       </button>
@@ -54,6 +56,8 @@ export default function Header() {
           <li><Link to="/MyAccount" onClick={toggleSidebar}>אזור אישי</Link></li>
           <li><Link to="/login-signup" onClick={toggleSidebar}>התחברות</Link></li>
           <li><Link to="/logout" onClick={toggleSidebar}>התנתק</Link></li>
+          {/* Admin Button */}
+          {isAdmin && <li className="admin-button"><Link to="/AdminPage" onClick={toggleSidebar}>Admin Dashboard</Link></li>}
         </ul>
       </nav>
     </header>

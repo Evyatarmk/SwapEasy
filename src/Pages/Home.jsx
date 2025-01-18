@@ -25,7 +25,6 @@ export default function Home() {
   const { allAds } = useContext(AllAdsContext);
    
 
-
 return (
   <div className="home-container">
     <Slider {...settings}>
