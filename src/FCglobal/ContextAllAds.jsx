@@ -52,7 +52,6 @@ const fetchAllAds = async () => {
 
     // Update the state with the fetched ads
     setAllAds(ads.body);
-    console.log("Fetched Ads:", ads);
   } catch (err) {
     // Handle errors
     console.error("Error fetching ads:", err.message);

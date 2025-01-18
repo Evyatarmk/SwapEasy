@@ -88,7 +88,6 @@ export default function FilterBar(props) {
       // Check if condition matches (or if no conditions are selected, include all)
       const isConditionMatch =
         filters.conditions.length === 0 || filters.conditions.includes(ad.condition);
-       console.log(ad)
       // Check if search term matches title or description
       const isSearchMatch = 
         !filters.search || 
@@ -105,8 +104,7 @@ export default function FilterBar(props) {
         isSearchMatch
       );
     });
-    console.log(filteredAds)
-    console.log(filters)
+
     props.sendAdsToParent(filteredAds)
   }
   if (loading) {
