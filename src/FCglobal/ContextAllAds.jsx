@@ -5,30 +5,67 @@ export const AllAdsContext = createContext();
 
 export const AllAdsProvider = ({ children }) => {
 
-  const [allAds, setAllAds] = useState([]);
+  const [allAds, setAllAds] = useState([
+    {
+      id: 1,
+      title: "Brand New Laptop for Sale",
+      description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
+      category: "רכב",
+      price: 800,
+      condition: "חדש באריזה",
+   
+        city: "New York",
+        street: "Main Street",
+        houseNumber: 123,
+        sellerContact:'fff',
+        sellerName:'hhhh',
+      images: [
+        "https://example.com/photos/laptop1.jpg",
+        "https://example.com/photos/laptop2.jpg"
+      ]
+    },
+  ]);
   const [loading, setLoading] = useState(true); // State to track loading status
   const [error, setError] = useState(null); // State to track errors
 
-  // Function to fetch ads from the API
-  const fetchAllAds = async () => {
-    try {
-      setLoading(true);
-      setError(null);
+ // Function to fetch ads from the API
+const fetchAllAds = async () => {
+  try {
+    setLoading(true);
+    setError(null);
 
-      const response = await getAllAds('https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads'); // Replace with your API endpoint
-    const ads = response.body;
-    setAllAds(ads);
-    console.log(ads);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    // Fetch data from the API
+    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ads: ${response.status} ${response.statusText}`);
     }
-  };
+
+    // Parse the JSON response
+    const ads = await response.json();
+
+    // Update the state with the fetched ads
+    setAllAds(ads.body);
+    console.log("Fetched Ads:", ads);
+  } catch (err) {
+    // Handle errors
+    console.error("Error fetching ads:", err.message);
+    setError(err.message);
+  } finally {
+    // Ensure loading is false after the operation
+    setLoading(false);
+  }
+};
 
   // Fetch ads when the component mounts
   useEffect(() => {
-    fetchAllAds();
+    fetchAllAds()
   }, []);
 
   // Function to add a new ad

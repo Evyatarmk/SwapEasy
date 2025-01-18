@@ -54,7 +54,7 @@ function App() {
         />
         <Route path="/post-ad" element={<PostAd />} />
         <Route path="/AdminPage" element ={<AdminPage/>}/>
-        <Route path="/ad-details/:adId" element={<ItemDetails />} />
+        <Route path="/ad-details/:adId" element={<AdDetails />} />
         <Route path="/MyAccount" element={<MyAccount />} />
         <Route path="/MyAccount/my-ads" element={<MyAds />} />
         <Route path="/MyAccount/saved-ads" element={<SavedAds />} />

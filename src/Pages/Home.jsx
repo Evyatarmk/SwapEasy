@@ -11,7 +11,6 @@ import FilterBar from '../FCHome/FilterBar';
 
 const settings = {
   arrows: true,
-  dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 2,
@@ -20,7 +19,6 @@ export default function Home() {
   const [adsToShow, setAdsToShow] = useState();
   const updateAdsToShow = (ads) => {
     setAdsToShow(ads)
-
   }
   const { allAds } = useContext(AllAdsContext);
    

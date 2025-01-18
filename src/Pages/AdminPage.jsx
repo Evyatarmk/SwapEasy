@@ -35,8 +35,8 @@ export default function AdminPage() {
               <p><strong>Price:</strong> {ad.price}₪</p>
 
               {/* Edit and Delete buttons */}
-              <button onClick={() => alert(`Edit functionality for Ad ID: ${ad.id}`)}>Edit</button>
-              <button onClick={() => handleDelete(ad.id)}>Delete</button>
+              <button className='AdminButton' onClick={() => alert(`Edit functionality for Ad ID: ${ad.id}`)}>Edit</button>
+              <button  className='AdminButton'onClick={() => handleDelete(ad.id)}>Delete</button>
             </div>
           ))
         )}
