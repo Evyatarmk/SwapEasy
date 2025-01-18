@@ -15,7 +15,7 @@ export default function FilterBar(props) {
       const filteredAds = allAds.filter((ad) => ad.category === selectedCategory);
       props.sendAdsToParent(filteredAds); // Send filtered ads to the parent
     }
-  }, [categories, selectedCategory, allAds]);
+  }, [selectedCategory, allAds]);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);

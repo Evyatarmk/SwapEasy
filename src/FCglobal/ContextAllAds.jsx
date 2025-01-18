@@ -19,6 +19,7 @@ export const AllAdsProvider = ({ children }) => {
       const response = await getAllAds('https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads'); // Replace with your API endpoint
     const ads = response.body;
     setAllAds(ads);
+    console.log(ads);
     } catch (err) {
       setError(err.message);
     } finally {

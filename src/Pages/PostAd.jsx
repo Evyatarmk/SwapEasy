@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React,{navigate, useState } from "react";
 import "../CSS/PostAd.css";
+import { postAd } from "../apicalls/PostAd";
 
 export default function PostAd() {
   const [images, setImages] = useState([]);
@@ -54,22 +55,32 @@ export default function PostAd() {
     setErrorMessage(""); // Reset error message when a condition is selected
   };
 
-  const  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    // const cognitoToken = localStorage.getItem("cognitoToken"); 
+    // Check if the user is logged in
+    // if (!isLoggedIn) {
+    //     setErrorMessage("עליך להתחבר למערכת לפני פרסום המודעה.");
+    //     return;
+    // }
 
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
       return;
-    }
+  }
 
     // Combine all ad details into a single object
     const fullAd = {
-      ...Ad,
-      productCondition,
-      images,
+        ...Ad,
+        productCondition,
+        images,
     };
-    
-  };
+
+    console.log(fullAd);
+
+    // Post the ad
+    postAd("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads", fullAd);
+};
 
   return (
     <div className="post-ad-container">
