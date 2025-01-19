@@ -32,11 +32,11 @@ export default function FilterBar(props) {
   });
 
   const cityOptions = [
-    { value: 'tel-aviv', label: 'תל אביב' },
-    { value: 'jerusalem', label: 'ירושלים' },
-    { value: 'haifa', label: 'חיפה' },
-    { value: 'beer-sheva', label: 'באר שבע' },
-    { value: 'eilat', label: 'אילת' },
+    { value: 'תל אביב', label: 'תל אביב' },
+    { value: 'ירושלים', label: 'ירושלים' },
+    { value: 'חיפה', label: 'חיפה' },
+    { value:  'באר שבע', label: 'באר שבע' },
+    { value: 'אילת', label: 'אילת' },
   ];
 
   const conditionOptions = [
