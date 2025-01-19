@@ -9,30 +9,18 @@ export default function LoginSignup({ onLogin }) {
     email: '',
     password: '',
     confirmPassword: '',
-    attributes: {
-      given_name: '',
-      family_name: '',
-    },
+    given_name: '',
+    family_name: '',
   });
 
   // Handle input change
   const handleChange = (event) => {
     const { name, value } = event.target;
-
-    if (name === 'given_name' || name === 'family_name') {
-      setUser((prevUser) => ({
-        ...prevUser,
-        attributes: {
-          ...prevUser.attributes,
-          [name]: value,
-        },
-      }));
-    } else {
       setUser((prevUser) => ({
         ...prevUser,
         [name]: value,
       }));
-    }
+    
   };
 
   // Toggle between login and sign-up forms
@@ -67,9 +55,35 @@ export default function LoginSignup({ onLogin }) {
       alert('Passwords do not match!');
       return;
     }
+    try {
+      const response = await fetch('https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User', {
+        method: 'POST', 
+        headers: {
+          'Content-Type': 'application/json',  // קביעת תוכן הבקשה כ-JSON
+        },
+        body: JSON.stringify({
+          email:User.email,
+          password: User.password,
+          firstName: User.given_name,
+          lastName:User.family_name,
 
-    // Your sign-up logic here
-    alert(`User signed up with email: ${User.email}`);
+        })  // המרת הנתונים לפורמט JSON
+      });
+  
+      // אם הבקשה הצליחה
+      if (response.ok) {
+        const data = await response.json();
+        console.log('User added successfully:', data);
+      } else {
+        // אם הייתה שגיאה בשרת
+        const errorData = await response.json();
+        console.error('Error adding user:', errorData);
+      }
+    } catch (error) {
+      // טיפול בשגיאות בבקשה
+      console.error('Error:', error);
+    }
+   
   };
 
   return (

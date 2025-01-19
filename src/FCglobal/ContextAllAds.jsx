@@ -5,26 +5,7 @@ export const AllAdsContext = createContext();
 
 export const AllAdsProvider = ({ children }) => {
 
-  const [allAds, setAllAds] = useState([
-    {
-      id: 1,
-      title: "Brand New Laptop for Sale",
-      description: "Selling a brand-new laptop with 16GB RAM and 512GB SSD. Perfect for work or gaming.",
-      category: "רכב",
-      price: 800,
-      condition: "חדש באריזה",
-   
-        city: "New York",
-        street: "Main Street",
-        houseNumber: 123,
-        sellerContact:'fff',
-        sellerName:'hhhh',
-      images: [
-        "https://example.com/photos/laptop1.jpg",
-        "https://example.com/photos/laptop2.jpg"
-      ]
-    },
-  ]);
+  const [allAds, setAllAds] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading status
   const [error, setError] = useState(null); // State to track errors
 

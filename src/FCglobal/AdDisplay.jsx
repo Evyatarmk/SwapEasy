@@ -23,7 +23,7 @@ export default function AdDisplay(props) {
         <h3>{ad.title}</h3>
         <p className="category">{ad.category}</p>
       </div>
-      <img src={ad.image} className="ad-thumbnail" />
+      <img src={ad.images[0]} className="ad-thumbnail" />
     </div>
   )
 }

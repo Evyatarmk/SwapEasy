@@ -1,8 +1,11 @@
-import React,{navigate, useState } from "react";
+import React,{ useState } from "react";
 import "../CSS/PostAd.css";
 import { postAd } from "../apicalls/PostAd";
+import convertImagesToBase64, { GetImageUpload } from "../FCglobal/convertImagesToBase64";
+import { useNavigate } from "react-router-dom";
 
 export default function PostAd() {
+  const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [productCondition, setProductCondition] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -11,31 +14,21 @@ export default function PostAd() {
     title: "",
     description: "",
     price: "",
-    pickupLocation: {
       city: "",
       street: "",
       houseNumber: "",
-    },
+      sellerContact:"",
+      sellerName:""
   });
 
   // Handle input change for all fields
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    if (name === "city" || name === "street" || name === "houseNumber") {
-      setAd((prevAd) => ({
-        ...prevAd,
-        pickupLocation: {
-          ...prevAd.pickupLocation,
-          [name]: value,
-        },
-      }));
-    } else {
       setAd((prevAd) => ({
         ...prevAd,
         [name]: value,
       }));
-    }
+  
   };
 
   // Handle image uploads
@@ -44,6 +37,7 @@ export default function PostAd() {
     const filteredFiles = files.filter((file) => !images.some((img) => img.name === file.name));
     const newImages = [...images, ...filteredFiles];
     setImages(newImages);
+    console.log(newImages)
   };
 
   const removeImage = (index) => {
@@ -55,7 +49,7 @@ export default function PostAd() {
     setErrorMessage(""); // Reset error message when a condition is selected
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
     // const cognitoToken = localStorage.getItem("cognitoToken"); 
     // Check if the user is logged in
@@ -67,19 +61,39 @@ export default function PostAd() {
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
       return;
+    }
+
+    GetImageUpload(images,async (base64Images) => {
+     // Combine all ad details into a single object
+     const fullAd = {
+      ...Ad,
+      condition: productCondition,
+      images:base64Images,
+  };
+  console.log(fullAd)
+  try {
+    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/uploadImage", {
+      method: "POST", // Specify the HTTP method
+      headers: {
+        "Content-Type": "application/json", // Required for JSON payload
+      },
+      body: JSON.stringify(fullAd), // Convert ad data to JSON string
+    });
+
+    // Check if the response is successful
+    if (!response.ok) {
+      throw new Error(`Failed to post ad. Status: ${response.status}, Message: ${response.statusText}`);
+    }
+
+    const result = await response.json(); // Parse the response JSON
+    console.log("Ad posted successfully:", result);
+    navigate("/MyAccount")
+  } catch (error) {
+    console.error("Error posting ad:", error.message);
+    throw error; // Re-throw the error for the caller to handle
   }
-
-    // Combine all ad details into a single object
-    const fullAd = {
-        ...Ad,
-        productCondition,
-        images,
-    };
-
-    console.log(fullAd);
-
-    // Post the ad
-    postAd("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads", fullAd);
+    });
+   
 };
 
   return (
@@ -193,6 +207,26 @@ export default function PostAd() {
               type="text"
               name="houseNumber"
               placeholder="מספר הבית"
+              required
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            שם:
+            <input
+              type="text"
+              name="sellerName"
+              placeholder="שם בעל המודעה"
+              required
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            פרטי התקשרות:
+            <input
+              type="text"
+              name="sellerContact"
+              placeholder="מספר פאלפון או מייל"
               required
               onChange={handleChange}
             />
