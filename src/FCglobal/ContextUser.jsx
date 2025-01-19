@@ -14,7 +14,7 @@ export const UserProvider = (props) => {
     city: "New York",
     street: "Main Street",
     houseNumber: 123,
-    myAds:[1,2],
+    myAds:["9fafc249-1f44-425d-9605-38a2aa7fd9f1"],
     savedAd:[3]
   });
 
@@ -28,9 +28,16 @@ export const UserProvider = (props) => {
   const updateUser = (user) => {
     setUser(user);
   };
+    // Function to update a user
+    const updateUserMyAds = (id) => {
+      let newMyAd=user.myAds.filter(adId=>adId=!id)
+      let newUser={...user,myAds:newMyAd}
+      setUser(newUser);
+    };
+  
 
   return (
-    <UserContext.Provider value={{ user, removeUser, updateUser }}>
+    <UserContext.Provider value={{ user,updateUserMyAds, removeUser, updateUser }}>
       {props.children}
     </UserContext.Provider>
   );

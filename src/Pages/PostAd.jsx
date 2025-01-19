@@ -72,7 +72,7 @@ export default function PostAd() {
   };
   console.log(fullAd)
   try {
-    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/uploadImage", {
+    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
       method: "POST", // Specify the HTTP method
       headers: {
         "Content-Type": "application/json", // Required for JSON payload

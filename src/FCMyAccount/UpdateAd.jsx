@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "../CSS/PostAd.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { PopupContext } from "../FCglobal/Popup";
+import { GetImageUpload } from "../FCglobal/convertImagesToBase64";
 
 export default function UpdateAd() {
   const location = useLocation();
@@ -62,17 +63,42 @@ export default function UpdateAd() {
       return;
     }
 
-    // Combine all ad details into a single object
-    const fullAd = {
-      ...Ad,
-      condition: productCondition,
-      images,
-    };
     showPopup('?לעדכן את המודעה ', (result) => {
       if (result) {
-        navigate("/MyAccount/my-ads")
+        GetImageUpload(images, async (base64Images) => {
+          // Combine all ad details into a single object
+          const fullAd = {
+            ...Ad,
+            condition: productCondition,
+            images: base64Images,
+          };
+          console.log(fullAd)
+          try {
+            const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
+              method: "PUT", // Specify the HTTP method
+              headers: {
+                "Content-Type": "application/json", // Required for JSON payload
+              },
+              body: JSON.stringify(fullAd), // Convert ad data to JSON string
+            });
+
+            // Check if the response is successful
+            if (!response.ok) {
+              throw new Error(`Failed to PUT ad. Status: ${response.status}, Message: ${response.statusText}`);
+            }
+
+            const result = await response.json(); // Parse the response JSON
+            console.log("Ad update successfully:", result);
+            navigate("/MyAccount")
+          } catch (error) {
+            console.error("Error posting ad:", error.message);
+            throw error; // Re-throw the error for the caller to handle
+          }
+        });
+
+
       } else {
-        alert('User clicked No!');
+
       }
     });
 
@@ -151,9 +177,8 @@ export default function UpdateAd() {
                 <button
                   key={condition}
                   type="button"
-                  className={`condition-button ${
-                    productCondition === condition ? "active" : ""
-                  }`}
+                  className={`condition-button ${productCondition === condition ? "active" : ""
+                    }`}
                   onClick={() => handleConditionClick(condition)}
                 >
                   {condition}
@@ -218,19 +243,19 @@ export default function UpdateAd() {
         </label>
 
         <div className="image-preview">
-  {images.map((image, index) => (
-    <div key={index} className="image-item">
-      {/* Check if the image is already a URL or needs URL.createObjectURL */}
-      <img
-        src={typeof image === "string" ? image : URL.createObjectURL(image)}
-        alt={`uploaded-${index}`}
-      />
-      <button type="button" onClick={() => removeImage(index)}>
-        ✖
-      </button>
-    </div>
-  ))}
-</div>
+          {images.map((image, index) => (
+            <div key={index} className="image-item">
+              {/* Check if the image is already a URL or needs URL.createObjectURL */}
+              <img
+                src={typeof image === "string" ? image : URL.createObjectURL(image)}
+                alt={`uploaded-${index}`}
+              />
+              <button type="button" onClick={() => removeImage(index)}>
+                ✖
+              </button>
+            </div>
+          ))}
+        </div>
 
         {/* כפתור פרסום */}
         <button type="submit" className="submit-button">
