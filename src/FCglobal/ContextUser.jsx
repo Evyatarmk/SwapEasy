@@ -15,7 +15,7 @@ export const UserProvider = (props) => {
     street: "",
     houseNumber: "",
     myAds: [],
-    savedAd: []
+    savedAds: []
   });
 
   useEffect(() => {
@@ -99,6 +99,18 @@ export const UserProvider = (props) => {
     setUser(newUser);
     console.log(newUser)
   };
+  
+// Function to update a user's saved ads
+const deleteOrAddToUserSavedAds = (id) => {
+  let updatedSavedAds;
+  if (user.savedAds.includes(id)) {
+    updatedSavedAds = user.savedAds.filter(adId => adId !== id);
+  } else {
+    updatedSavedAds = [...user.savedAds, id];
+  }
+  const updatedUser = { ...user, savedAds: updatedSavedAds };
+  setUser(updatedUser)
+};
    // Function to update a user
    const AddAdToUserMyAds = (id) => {
     let newMyAd = [...user.myAds,id]
@@ -109,7 +121,7 @@ export const UserProvider = (props) => {
 
 
   return (
-    <UserContext.Provider value={{ user, updateUserMyAds, removeUser, updateUser ,AddAdToUserMyAds}}>
+    <UserContext.Provider value={{ user, updateUserMyAds, removeUser, updateUser ,AddAdToUserMyAds,deleteOrAddToUserSavedAds}}>
       {props.children}
     </UserContext.Provider>
   );

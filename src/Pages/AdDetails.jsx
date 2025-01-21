@@ -10,9 +10,39 @@ export default function adDetails() {
   const [showAllImages, setShowAllImages] = useState(false);
   const { adId } = useParams();
   const { getAd } = useContext(AllAdsContext);
-  const { user } = useContext(UserContext);
+  const { user ,deleteOrAddToUserSavedAds,updateUser} = useContext(UserContext);
   const [ad, setAd] = useState(getAd(adId));
+  const addOrDeleteSaveAd=async(e)=>{
+    e.stopPropagation();
+    deleteOrAddToUserSavedAds(ad.id)
+    try {
+      const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User/SavedAds", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          adId: ad.id,
+        }),
+      });
   
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error:", errorData.error);
+        return errorData;
+      }
+  
+      const result = await response.json();
+      console.log("Success:", result);
+      updateUser(result.user)
+      return result;
+    } catch (error) {
+      console.error("Fetch error:", error);
+      throw error;
+    }
+  
+  }
   
 if (!ad) {
   return <p>Ad not found</p>; // Handle case where ad is not found
@@ -63,7 +93,7 @@ if (!ad) {
           </button>
       </div>
 
-      <img className="haert-button" src={user.savedAd.includes(ad.id)?haertIcon:heartEmptyIcon}/>
+      <img  onClick={addOrDeleteSaveAd} className="haert-button" src={user.savedAds.includes(ad.id)?haertIcon:heartEmptyIcon}/>
       {/* פרטי הפריט */}
       <div className="ad-details">
         <h2>{ad.title}</h2>

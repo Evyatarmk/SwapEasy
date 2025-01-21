@@ -8,8 +8,39 @@ import { UserContext } from './ContextUser';
 export default function AdDisplay(props) {
   const ad = props.ad;
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user ,deleteOrAddToUserSavedAds,updateUser} = useContext(UserContext);
+ const addOrDeleteSaveAd=async(e)=>{
+  e.stopPropagation();
+  deleteOrAddToUserSavedAds(ad.id)
+  try {
+    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User/SavedAds", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: user.id,
+        adId: ad.id,
+      }),
+    });
 
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error:", errorData.error);
+      return errorData;
+    }
+
+    const result = await response.json();
+    console.log("Success:", result);
+    updateUser(result.user)
+    return result;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
+  }
+
+
+ }
   const goToAdDetails=()=>{
     navigate(`/ad-details/${ad.id}`);
   }
@@ -17,7 +48,7 @@ export default function AdDisplay(props) {
     <div className="container-ad" key={ad.id} onClick={goToAdDetails}>
       <div className="ad-info">
         <div className="ad-info-header">
-          <img className="haert-button" src={user.savedAd.includes(ad.id)?haertIcon:heartEmptyIcon} />
+          <img onClick={addOrDeleteSaveAd} className="haert-button" src={user.savedAds.includes(ad.id)?haertIcon:heartEmptyIcon} />
           <p className="price">₪ {ad.price}</p>
         </div>
         <h3>{ad.title}</h3>

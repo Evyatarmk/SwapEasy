@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../CSS/Header.css';
 import UserIcon from '../Icons/User-icon.png';
+import SwapEasy from '../Icons/SwapEasy.png';
 
 export default function Header({ isAdmin }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,9 +15,9 @@ export default function Header({ isAdmin }) {
   return (
     <header className="fixed-header">
       {/* Logo */}
-      <div className="logo">
-        <Link to="/index.html">MyWebsite</Link>
-      </div>
+
+      <Link to="/index.html"><img className="logo" src={SwapEasy}/></Link>
+      
 
       {/* Desktop Navigation */}
       <nav className="desktop-nav">

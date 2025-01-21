@@ -9,7 +9,11 @@ h2 {
   margin-bottom: 20px;
 }
 
-
+.slider-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
 /* סרגל קטגוריות */
 .category-bar {
   display: flex;
@@ -28,7 +32,6 @@ h2 {
   background-color: #ffffff;
   border: 0.01px solid black;
   transition: background-color 0.3s ease;
-
 }
 
 
@@ -49,55 +52,4 @@ h2 {
   max-width: 900px;
 }
 
-/* עיצוב לכפתור הבא (next) */
-button.slick-arrow.slick-next {
-  background-color: #d68e00;
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  z-index: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
 
-button.slick-arrow.slick-next:hover {
-  background-color: #d68e00;
-  opacity: 0.8;
-}
-
-/* עיצוב לכפתור הקודם (prev) */
-button.slick-arrow.slick-prev {
-  background-color: #d68e00;
-  border: none;
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  z-index: 1;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-button.slick-arrow.slick-prev:hover {
-  background-color: #d68e00;
-  opacity: 0.8;
-}
-.slick-slider.slick-initialized{
-  margin-bottom: 30px;
-}

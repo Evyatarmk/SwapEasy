@@ -1,19 +1,25 @@
 import React, { useContext, useState } from 'react';
 import { AllAdsContext } from '../FCglobal/ContextAllAds';
-import Slider from 'react-slick';
 import '../CSS/Home.css'; // כל הסגנונות יהיו כאן
-import "slick-carousel/slick/slick.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import AdDisplay from '../FCglobal/AdDisplay';
 import FilterBar from '../FCHome/FilterBar';
-
+import carPhoto from '../Photos/carPhoto.png';
+import homePhoto from '../Photos/homePhoto.png';
+import sofaPhoto from '../Photos/sofaPhoto.png';
 
 
 const settings = {
-  arrows: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 2,
+  dots: true, // נקודות ניווט
+  infinite: true, // לופ אינסופי
+  speed: 500, // מהירות מעבר
+  slidesToShow: 1, // מספר השקפים המוצגים
+  slidesToScroll: 1, // מספר השקפים שגוללים בכל מעבר
+  autoplay: true, // הפעלה אוטומטית
+  autoplaySpeed: 3000, // מהירות ההפעלה האוטומטית (3 שניות)
+  pauseOnHover: true, // עצירה בהצבעה על השקף
 };
 export default function Home() {
   const [adsToShow, setAdsToShow] = useState();
@@ -25,11 +31,19 @@ export default function Home() {
 
 return (
   <div className="home-container">
-    <Slider {...settings}>
-      {allAds.map((ad) => (
-        <AdDisplay ad={ad} key={ad.id} />
-      ))}
-    </Slider>
+   <div className="home-container">
+  <Slider {...settings}>
+    <div>
+      <img src={carPhoto} alt="Car photo" className="slider-image" />
+    </div>
+    <div>
+      <img src={homePhoto} alt="Home photo" className="slider-image" />
+    </div>
+    <div>
+      <img src={sofaPhoto} alt="Sofa photo" className="slider-image" />
+    </div>
+  </Slider>
+</div>
 
     {/* סרגל סינון */}
     <FilterBar sendAdsToParent={updateAdsToShow} />
