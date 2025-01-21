@@ -9,7 +9,6 @@ import isTokenValid from "../FCglobal/isTokenValid";
 
 export default function UpdateAd() {
   const { updateAd } = useContext(AllAdsContext);
-  const { user } = useContext(UserContext);
   const location = useLocation();
   const adToUpdate = location.state.ad;
   const [images, setImages] = useState(adToUpdate.images || []);
@@ -59,7 +58,7 @@ export default function UpdateAd() {
     setErrorMessage("");
   };
 const handleCancel=()=>{
-  navigate("/MyAccount/my-ads")
+  navigate("/AdminPage")
 }
   // Handle form submission
   const handleSubmit = (e) => {
@@ -84,16 +83,15 @@ const handleCancel=()=>{
             condition: productCondition,
             images: base64Images,
           };
-          console.log(JSON.stringify(fullAd))
-          console.log("Authorization"+idToken)
+          console.log(fullAd)
           try {
-            const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
+            const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
               method: "PUT", // Specify the HTTP method
               headers: {
                 "Content-Type": "application/json", // Required for JSON payload
                 "Authorization":idToken
               },
-              body: JSON.stringify({...fullAd,userId:user.id}), // Convert ad data to JSON string
+              body: JSON.stringify(fullAd), // Convert ad data to JSON string
             });
 
             // Check if the response is successful
@@ -104,7 +102,7 @@ const handleCancel=()=>{
             const result = await response.json(); // Parse the response JSON
             console.log("Ad update successfully:", result);
             updateAd(result.item)
-            navigate("/MyAccount/my-ads")
+            navigate("/AdminPage")
           } catch (error) {
             console.error("Error posting ad:", error.message);
             throw error; // Re-throw the error for the caller to handle

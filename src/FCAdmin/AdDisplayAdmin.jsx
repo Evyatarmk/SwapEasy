@@ -6,11 +6,13 @@ import deleteIcon from '../Icons/delete.png';
 import { PopupContext } from '../FCglobal/Popup';
 import { UserContext } from '../FCglobal/ContextUser';
 import isTokenValid from '../FCglobal/isTokenValid';
+import { AllAdsContext } from '../FCglobal/ContextAllAds';
 
-export default function AdDisplayMyAds({ ad }) {
+export default function AdDisplayAdmin({ ad }) {
   const navigate = useNavigate();
   const { showPopup } = useContext(PopupContext);
-  const { user,updateUserMyAds } = useContext(UserContext);
+  const { updateUserMyAds } = useContext(UserContext);
+  const { removeAd } = useContext(AllAdsContext);
 
   const goToAdDetails = () => {
     navigate(`/ad-details/${ad.id}`);
@@ -31,14 +33,13 @@ export default function AdDisplayMyAds({ ad }) {
                   navigate("/index.html")
                 return;
               }
-              console.log( JSON.stringify({id:ad.id,userId:user.id}))
-          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
+          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
             method: "DELETE", // Specify the HTTP method
             headers: {
               "Content-Type": "application/json", // Required for JSON payload
               "Authorization":idToken
             },
-            body: JSON.stringify({id:ad.id,userId:user.id}), // Convert ad data to JSON string
+            body: JSON.stringify({id:ad.id}), // Convert ad data to JSON string
           });
 
           // Check if the response is successful
@@ -48,7 +49,7 @@ export default function AdDisplayMyAds({ ad }) {
 
           const result = await response.json(); // Parse the response JSON
           console.log("Ad DELETE successfully:", result);
-          updateUserMyAds(ad.id)
+          removeAd(ad.id)
         } catch (error) {
           console.error("Error posting ad:", error.message);
           throw error; // Re-throw the error for the caller to handle

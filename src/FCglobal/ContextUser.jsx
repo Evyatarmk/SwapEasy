@@ -18,7 +18,7 @@ export const UserProvider = (props) => {
     myAds: [],
     savedAds: []
   });
-
+  
   useEffect(() => {
     const idToken = localStorage.getItem("idToken");
     if (idToken && isTokenValid(idToken)) {
@@ -76,7 +76,43 @@ export const UserProvider = (props) => {
     }
 
   }, []);
-
+  const [isAdmin, setIsAdmin] = useState(false);
+  
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      console.log("Checking admin status...");
+      const idToken = localStorage.getItem("idToken");
+  
+      if (idToken && isTokenValid(idToken)) {
+        const [userId, email] = DecodeIDToken(idToken);
+  
+        try {
+          // שליחת userId לשרת
+          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: idToken,
+            },
+            body: JSON.stringify({ Username: userId }),
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Failed to fetch admin status. Status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          console.log("Admin status:", data.isAdmin);
+          setIsAdmin(data.isAdmin);
+        } catch (error) {
+          console.error("Error sending userId to the server:", error);
+        }
+      }
+    };
+  
+    checkAdminStatus();
+  }, []);
+  
   
   const DecodeIDToken = (idToken) => {
     // Decode the ID token to get user info
@@ -125,7 +161,7 @@ const deleteOrAddToUserSavedAds = (id) => {
 
 
   return (
-    <UserContext.Provider value={{ user, updateUserMyAds, removeUser, updateUser ,AddAdToUserMyAds,deleteOrAddToUserSavedAds}}>
+    <UserContext.Provider value={{ isAdmin,user, updateUserMyAds, removeUser, updateUser ,AddAdToUserMyAds,deleteOrAddToUserSavedAds}}>
       {props.children}
     </UserContext.Provider>
   );

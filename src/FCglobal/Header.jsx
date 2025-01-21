@@ -3,16 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../CSS/Header.css';
 import UserIcon from '../Icons/User-icon.png';
 import SwapEasy from '../Icons/SwapEasy.png';
+import isTokenValid from './isTokenValid';
 
-export default function Header({ isAdmin }) {
+export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isLogin, setisLogin] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
   const loginHref="https://us-east-1ecoh9tvdf.auth.us-east-1.amazoncognito.com/login/continue?client_id=hv93sgcsom9m5jqtkl2e7id67&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html&response_type=token&scope=email+openid+phone"
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleMouseEnter = () => setDropdownVisible(true);
   const handleMouseLeave = () => setDropdownVisible(false);
+
   return (
     <header className="fixed-header">
       {/* Logo */}
@@ -46,7 +47,6 @@ export default function Header({ isAdmin }) {
           </li>
           <li className="publish-ad-button"><Link to="/post-ad">+ פרסום מודעה</Link></li>
           {/* Admin Button */}
-          {isAdmin && <li className="admin-button"><Link to="/AdminPage">Admin Dashboard</Link></li>}
         </ul>
       </nav>
 
@@ -67,7 +67,6 @@ export default function Header({ isAdmin }) {
                   navigate("/index.html")
                 }}>התנתק</a></li>
           {/* Admin Button */}
-          {isAdmin && <li className="admin-button"><Link to="/AdminPage" onClick={toggleSidebar}>Admin Dashboard</Link></li>}
         </ul>
       </nav>
     </header>

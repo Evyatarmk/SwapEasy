@@ -1,17 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../FCglobal/ContextUser';
 import '../CSS/MyAccountSidebar.css';
 import UserIcon from '../Icons/User-icon.png';
 import { Link } from 'react-router-dom';
+import isTokenValid from '../FCglobal/isTokenValid';
 
 export default function MyAccountSidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user,isAdmin } = useContext(UserContext);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
+    
   return (
     <>
       {/* כפתור פתיחה - יופיע רק במסכים קטנים */}
@@ -31,6 +32,7 @@ export default function MyAccountSidebar() {
         <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
           <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
           <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
+          {isAdmin && <li className="admin-button"><Link to="/AdminPage">Admin Dashboard</Link></li>}
 
         </ul>
       </div>
@@ -47,7 +49,8 @@ export default function MyAccountSidebar() {
           <li><Link to="/MyAccount/my-ads">המודעות שלי</Link></li>
           <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
           <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
-  
+          {isAdmin && <li className="admin-button"><Link to="/AdminPage">Admin Dashboard</Link></li>}
+
         </ul>
       </div>
       </nav>

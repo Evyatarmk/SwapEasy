@@ -9,29 +9,21 @@ import MyAccount from './Pages/MyAccount';
 import PostAd from './Pages/PostAd';
 import { Routes, Route } from 'react-router-dom';
 import UpdateAd from './FCMyAccount/UpdateAd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AdminPage from './Pages/AdminPage';
 import ProtectedRoute from './FCglobal/ProtectedRoute'; // ייבוא קומפוננטת הגנה
+import isTokenValid from './FCglobal/isTokenValid';
 
 function App() {
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  // Update admin state based on user login
-  const handleLogin = (user) => {
-    if (user.role === 'admin') {
-      setIsAdmin(true);
-    } else {
-      setIsAdmin(false);
-    }
-  };
+  
 
   return (
     <>
-      <Header isAdmin={isAdmin} />
+      <Header />
       <Routes>
         <Route path="/index.html" element={<Home />} />
         <Route path="/ad-details/:adId" element={<AdDetails />} />
-        
+
         {/* נתיבים מוגנים */}
         <Route
           path="/post-ad"
