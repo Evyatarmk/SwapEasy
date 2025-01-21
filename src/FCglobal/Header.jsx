@@ -15,13 +15,13 @@ export default function Header({ isAdmin }) {
     <header className="fixed-header">
       {/* Logo */}
       <div className="logo">
-        <Link to="/">MyWebsite</Link>
+        <Link to="/index.html">MyWebsite</Link>
       </div>
 
       {/* Desktop Navigation */}
       <nav className="desktop-nav">
         <ul className="nav-links">
-          <li><Link to="/">המוצרים שלנו</Link></li>
+          <li><Link to="/index.html">המוצרים שלנו</Link></li>
           <li
             className="dropdown-wrapper"
             onMouseEnter={handleMouseEnter}
@@ -51,7 +51,7 @@ export default function Header({ isAdmin }) {
       <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-button" onClick={toggleSidebar}>✖</button>
         <ul className="nav-links">
-          <li><Link to="/" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
+          <li><Link to="/index.html" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
           <li className="publish-ad-button"><Link to="/post-ad" onClick={toggleSidebar}>+ פרסום מודעה</Link></li>
           <li><Link to="/MyAccount" onClick={toggleSidebar}>אזור אישי</Link></li>
           <li><Link to="/login-signup" onClick={toggleSidebar}>התחברות</Link></li>

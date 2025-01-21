@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 
 export const UserContext = createContext();
 
@@ -17,6 +17,44 @@ export const UserProvider = (props) => {
     myAds:["9fafc249-1f44-425d-9605-38a2aa7fd9f1"],
     savedAd:[3]
   });
+
+  useEffect(() => {
+    // Parse the hash fragment to extract tokens
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+
+    const idToken = hashParams.get("id_token");
+    const accessToken = hashParams.get("access_token");
+
+    if (idToken && accessToken) {
+      // Save tokens in localStorage
+      localStorage.setItem("idToken", idToken);
+      localStorage.setItem("accessToken", accessToken);
+
+      // Decode the ID token to get user info
+      const decodedToken = JSON.parse(atob(idToken.split(".")[1]));
+      const userId = decodedToken.sub;
+      const email = decodedToken.email; // Extract the email
+      console.log(userId,email)
+      // Send userId to the server
+      fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id:userId ,email}),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.user)
+         setUser(data.user)
+        })
+        .catch((error) => {
+          console.error("Error sending userId to the server:", error);
+        });
+    } else {
+      console.error("Tokens not found in the URL hash.");
+    }
+  }, []);
 
 
   // Function to remove a user by ID

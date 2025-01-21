@@ -14,23 +14,7 @@ import { useState } from 'react';
 import AdminPage from './Pages/AdminPage';
 
 function App() {
-  const item = {
-    images: [
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-      "https://via.placeholder.com/300",
-    ],
-    title: "מחשב נייד Dell XPS 15",
-    description: "מחשב נייד במצב חדש, ללא שריטות, כולל מטען מקורי.",
-    category: "מחשבים",
-    condition: "כמו חדש",
-    price: 4500,
-    city: "תל אביב",
-    street: "אלנבי",
-    houseNumber: 45,
-    sellerName: "אביתר מקבריט",
-    sellerContact: "050-1234567",
-  };
+
 
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -47,7 +31,7 @@ function App() {
     <>
       <Header isAdmin={isAdmin} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/index.html" element={<Home />} />
         <Route 
           path="/login-signup" 
           element={<LoginSignup onLogin={handleLogin} />} 
