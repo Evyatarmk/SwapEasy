@@ -5,6 +5,7 @@ import convertImagesToBase64, { GetImageUpload } from "../FCglobal/convertImages
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../FCglobal/ContextUser";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
+import isTokenValid from "../FCglobal/isTokenValid";
 
 export default function PostAd() {
   const navigate = useNavigate();
@@ -56,12 +57,11 @@ export default function PostAd() {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
-    // const cognitoToken = localStorage.getItem("cognitoToken"); 
-    // Check if the user is logged in
-    // if (!isLoggedIn) {
-    //     setErrorMessage("עליך להתחבר למערכת לפני פרסום המודעה.");
-    //     return;
-    // }
+    const idToken = localStorage.getItem("idToken"); 
+   if (!idToken || !isTokenValid(idToken)) {
+        navigate("/index.html")
+        return;
+    }
 
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
@@ -75,12 +75,13 @@ export default function PostAd() {
       condition: productCondition,
       images:base64Images,
   };
-  console.log(fullAd)
+  console.log( JSON.stringify({...fullAd,userId:user.id}))
   try {
     const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
       method: "POST", // Specify the HTTP method
       headers: {
         "Content-Type": "application/json", // Required for JSON payload
+        "Authorization":idToken
       },
       body: JSON.stringify({...fullAd,userId:user.id}), // Convert ad data to JSON string
     });

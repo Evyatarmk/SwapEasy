@@ -5,6 +5,7 @@ import editIcon from '../Icons/edit.png';
 import deleteIcon from '../Icons/delete.png';
 import { PopupContext } from '../FCglobal/Popup';
 import { UserContext } from '../FCglobal/ContextUser';
+import isTokenValid from '../FCglobal/isTokenValid';
 
 export default function AdDisplayMyAds({ ad }) {
   const navigate = useNavigate();
@@ -25,11 +26,16 @@ export default function AdDisplayMyAds({ ad }) {
     showPopup('?האם למחוק את המודעה',async (result) => {
       if (result) {
         try {
-          console.log(ad.id)
+         const idToken = localStorage.getItem("idToken"); 
+                if (!idToken || !isTokenValid(idToken)) {
+                  navigate("/index.html")
+                return;
+              }
           const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
             method: "DELETE", // Specify the HTTP method
             headers: {
               "Content-Type": "application/json", // Required for JSON payload
+              "Authorization":idToken
             },
             body: JSON.stringify({id:ad.id}), // Convert ad data to JSON string
           });

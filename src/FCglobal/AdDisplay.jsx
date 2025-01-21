@@ -4,6 +4,7 @@ import '../CSS/AdHomeDisplay.css'
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from './ContextUser';
+import isTokenValid from './isTokenValid';
 
 export default function AdDisplay(props) {
   const ad = props.ad;
@@ -11,12 +12,18 @@ export default function AdDisplay(props) {
   const { user ,deleteOrAddToUserSavedAds,updateUser} = useContext(UserContext);
  const addOrDeleteSaveAd=async(e)=>{
   e.stopPropagation();
+     const idToken = localStorage.getItem("idToken"); 
+                  if (!idToken || !isTokenValid(idToken)) {
+                    navigate("/index.html")
+                  return;
+              }
   deleteOrAddToUserSavedAds(ad.id)
   try {
     const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User/SavedAds", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        "Authorization":idToken
       },
       body: JSON.stringify({
         userId: user.id,

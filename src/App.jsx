@@ -32,10 +32,6 @@ function App() {
       <Header isAdmin={isAdmin} />
       <Routes>
         <Route path="/index.html" element={<Home />} />
-        <Route 
-          path="/login-signup" 
-          element={<LoginSignup onLogin={handleLogin} />} 
-        />
         <Route path="/post-ad" element={<PostAd />} />
         <Route path="/AdminPage" element ={<AdminPage/>}/>
         <Route path="/ad-details/:adId" element={<AdDetails />} />

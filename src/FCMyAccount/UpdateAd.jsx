@@ -5,6 +5,7 @@ import { PopupContext } from "../FCglobal/Popup";
 import { GetImageUpload } from "../FCglobal/convertImagesToBase64";
 import { UserContext } from "../FCglobal/ContextUser";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
+import isTokenValid from "../FCglobal/isTokenValid";
 
 export default function UpdateAd() {
   const { updateAd } = useContext(AllAdsContext);
@@ -70,6 +71,11 @@ const handleCancel=()=>{
 
     showPopup('?לעדכן את המודעה ', (result) => {
       if (result) {
+        const idToken = localStorage.getItem("idToken"); 
+        if (!idToken || !isTokenValid(idToken)) {
+          navigate("/index.html")
+        return;
+    }
         GetImageUpload(images, async (base64Images) => {
           // Combine all ad details into a single object
           const fullAd = {
@@ -83,6 +89,7 @@ const handleCancel=()=>{
               method: "PUT", // Specify the HTTP method
               headers: {
                 "Content-Type": "application/json", // Required for JSON payload
+                "Authorization":idToken
               },
               body: JSON.stringify(fullAd), // Convert ad data to JSON string
             });
@@ -107,9 +114,8 @@ const handleCancel=()=>{
 
       }
     });
-
   };
-
+  
   return (
     <div className="post-ad-container">
       <h2>עדכון מודעה</h2>

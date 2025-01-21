@@ -4,6 +4,7 @@ import "../CSS/UpdatePersonalDetails.css";
 import MyAccountSidebar from "./MyAccountSidebar";
 import { PopupContext } from '../FCglobal/Popup';
 import { useNavigate } from 'react-router-dom';
+import isTokenValid from '../FCglobal/isTokenValid';
 
 export default function UpdatePersonalDetails() {
   const { user,updateUser } = useContext(UserContext);
@@ -29,12 +30,18 @@ useEffect(() => {
     e.preventDefault();
     showPopup('?לעדכן את הפרופיל ', async(result) => {
       if (result) {
+           const idToken = localStorage.getItem("idToken"); 
+                if (!idToken || !isTokenValid(idToken)) {
+                  navigate("/index.html")
+                return;
+            }
         console.log(JSON.stringify(formData))
         try {
           const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
             method: "PUT", // Specify the HTTP method
             headers: {
               "Content-Type": "application/json", // Required for JSON payload
+              "Authorization":idToken
             },
             
             body: JSON.stringify(formData), // Convert ad data to JSON string

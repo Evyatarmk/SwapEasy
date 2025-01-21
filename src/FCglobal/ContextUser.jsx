@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import isTokenValid from "./isTokenValid";
 
 export const UserContext = createContext();
 
@@ -20,7 +21,7 @@ export const UserProvider = (props) => {
 
   useEffect(() => {
     const idToken = localStorage.getItem("idToken");
-    if (idToken) {
+    if (idToken && isTokenValid(idToken)) {
       const [userId, email] = DecodeIDToken(idToken)
 
         // Send userId to the server
@@ -43,7 +44,7 @@ export const UserProvider = (props) => {
     else {
       // Parse the hash fragment to extract tokens
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
-
+      console.log("dddddd") 
       const idToken = hashParams.get("id_token");
       const accessToken = hashParams.get("access_token");
 
@@ -75,6 +76,8 @@ export const UserProvider = (props) => {
     }
 
   }, []);
+
+  
   const DecodeIDToken = (idToken) => {
     // Decode the ID token to get user info
     const decodedToken = JSON.parse(atob(idToken.split(".")[1]));
