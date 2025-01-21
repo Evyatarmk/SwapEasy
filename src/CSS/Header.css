@@ -82,6 +82,7 @@ body {
   color: #000;
   font-size: 1.2rem;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -189,6 +190,7 @@ body {
   transition: background-color 0.3s;
   padding: 10px;
   text-align: end;
+  cursor: pointer;
 }
 
 .dropdown-menu li a:hover {

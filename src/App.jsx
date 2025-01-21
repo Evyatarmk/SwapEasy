@@ -1,6 +1,5 @@
 import './App.css';
 import Header from './FCglobal/Header';
-import LoginSignup from './FCglobal/LoginSignup';
 import MyAds from './FCMyAccount/MyAds';
 import SavedAds from './FCMyAccount/SavedAds';
 import UpdatePersonalDetails from './FCMyAccount/UpdatePersonalDetails';
@@ -12,10 +11,9 @@ import { Routes, Route } from 'react-router-dom';
 import UpdateAd from './FCMyAccount/UpdateAd';
 import { useState } from 'react';
 import AdminPage from './Pages/AdminPage';
+import ProtectedRoute from './FCglobal/ProtectedRoute'; // ייבוא קומפוננטת הגנה
 
 function App() {
-
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   // Update admin state based on user login
@@ -32,14 +30,65 @@ function App() {
       <Header isAdmin={isAdmin} />
       <Routes>
         <Route path="/index.html" element={<Home />} />
-        <Route path="/post-ad" element={<PostAd />} />
-        <Route path="/AdminPage" element ={<AdminPage/>}/>
         <Route path="/ad-details/:adId" element={<AdDetails />} />
-        <Route path="/MyAccount" element={<MyAccount />} />
-        <Route path="/MyAccount/my-ads" element={<MyAds />} />
-        <Route path="/MyAccount/saved-ads" element={<SavedAds />} />
-        <Route path="/MyAccount/update-personal-details" element={<UpdatePersonalDetails />} />
-        <Route path="/MyAccount/update-Ad" element={<UpdateAd />} />
+        
+        {/* נתיבים מוגנים */}
+        <Route
+          path="/post-ad"
+          element={
+            <ProtectedRoute>
+              <PostAd />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/AdminPage"
+          element={
+            <ProtectedRoute>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyAccount"
+          element={
+            <ProtectedRoute>
+              <MyAccount />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyAccount/my-ads"
+          element={
+            <ProtectedRoute>
+              <MyAds />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyAccount/saved-ads"
+          element={
+            <ProtectedRoute>
+              <SavedAds />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyAccount/update-personal-details"
+          element={
+            <ProtectedRoute>
+              <UpdatePersonalDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/MyAccount/update-Ad"
+          element={
+            <ProtectedRoute>
+              <UpdateAd />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </>
   );

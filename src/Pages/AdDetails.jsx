@@ -14,6 +14,10 @@ export default function adDetails() {
   const [ad, setAd] = useState(getAd(adId));
   const addOrDeleteSaveAd=async(e)=>{
     e.stopPropagation();
+    const idToken = localStorage.getItem("idToken"); 
+            if (!idToken || !isTokenValid(idToken)) {
+              window.location.href ="https://us-east-1ecoh9tvdf.auth.us-east-1.amazoncognito.com/login?client_id=hv93sgcsom9m5jqtkl2e7id67&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html";
+            return;}
     deleteOrAddToUserSavedAds(ad.id)
     try {
       const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User/SavedAds", {

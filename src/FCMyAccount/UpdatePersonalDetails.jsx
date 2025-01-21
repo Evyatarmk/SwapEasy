@@ -85,6 +85,8 @@ useEffect(() => {
           <input
             type="text"
             id="firstName"
+            pattern="[א-תa-zA-Z\s]+" // Hebrew, English, and spaces
+              title="יש להזין רק אותיות בעברית, באנגלית או רווחים"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
@@ -99,6 +101,8 @@ useEffect(() => {
             type="text"
             id="lastName"
             name="lastName"
+            pattern="[א-תa-zA-Z\s]+" // Hebrew, English, and spaces
+              title="יש להזין רק אותיות בעברית, באנגלית או רווחים"
             value={formData.lastName}
             onChange={handleChange}
             
@@ -141,6 +145,8 @@ useEffect(() => {
             type="text"
             id="city"
             name="city"
+            pattern="[א-תa-zA-Z\s]+" // Hebrew, English, and spaces
+              title="יש להזין רק אותיות בעברית, באנגלית או רווחים"
             value={formData.city}
             onChange={handleChange}
             
@@ -153,6 +159,8 @@ useEffect(() => {
             type="text"
             id="street"
             name="street"
+            pattern="[א-תa-zA-Z\s]+" // Hebrew, English, and spaces
+              title="יש להזין רק אותיות בעברית, באנגלית או רווחים"
             value={formData.street}
             onChange={handleChange}
             
@@ -162,7 +170,7 @@ useEffect(() => {
         <div className="form-group">
           <label htmlFor="houseNumber">מספר בית</label>
           <input
-            type="text"
+            type="number"
             id="houseNumber"
             name="houseNumber"
             value={formData.houseNumber}
