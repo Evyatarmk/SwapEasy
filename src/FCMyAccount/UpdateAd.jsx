@@ -3,8 +3,11 @@ import "../CSS/PostAd.css";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { PopupContext } from "../FCglobal/Popup";
 import { GetImageUpload } from "../FCglobal/convertImagesToBase64";
+import { UserContext } from "../FCglobal/ContextUser";
+import { AllAdsContext } from "../FCglobal/ContextAllAds";
 
 export default function UpdateAd() {
+  const { updateAd } = useContext(AllAdsContext);
   const location = useLocation();
   const adToUpdate = location.state.ad;
   const [images, setImages] = useState(adToUpdate.images || []);
@@ -13,7 +16,7 @@ export default function UpdateAd() {
   const [Ad, setAd] = useState({ ...adToUpdate });
   const { showPopup } = useContext(PopupContext);
   const navigate = useNavigate();
-
+ 
   // Handle input change for all fields
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,7 +56,9 @@ export default function UpdateAd() {
     setProductCondition(condition);
     setErrorMessage("");
   };
-
+const handleCancel=()=>{
+  navigate("/MyAccount/my-ads")
+}
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,7 +94,8 @@ export default function UpdateAd() {
 
             const result = await response.json(); // Parse the response JSON
             console.log("Ad update successfully:", result);
-            navigate("/MyAccount")
+            updateAd(result.item)
+            navigate("/MyAccount/my-ads")
           } catch (error) {
             console.error("Error posting ad:", error.message);
             throw error; // Re-throw the error for the caller to handle
@@ -257,10 +263,15 @@ export default function UpdateAd() {
           ))}
         </div>
 
-        {/* כפתור פרסום */}
-        <button type="submit" className="submit-button">
-          עדכן מודעה
-        </button>
+          {/* כפתורי שמירה וביטול */}
+        <div className="form-buttons">
+          <button type="button" className="cancel-button" onClick={handleCancel}>
+            ביטול
+          </button>
+          <button type="submit" className="update-button">
+            שמירה
+          </button>
+        </div>
       </form>
     </div>
   );

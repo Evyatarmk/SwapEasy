@@ -1,16 +1,23 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../FCglobal/ContextUser';
 import "../CSS/UpdatePersonalDetails.css";
 import MyAccountSidebar from "./MyAccountSidebar";
 import { PopupContext } from '../FCglobal/Popup';
+import { useNavigate } from 'react-router-dom';
 
 export default function UpdatePersonalDetails() {
-  const { user } = useContext(UserContext);
+  const { user,updateUser } = useContext(UserContext);
   const { showPopup } = useContext(PopupContext);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(user);
+useEffect(() => {
+  setFormData(user)
+ },[user])
 
   const handleChange = (e) => {
+    console.log(JSON.stringify(formData))
+
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -20,9 +27,32 @@ export default function UpdatePersonalDetails() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    showPopup('?לעדכן את הפרופיל ', (result) => {
+    showPopup('?לעדכן את הפרופיל ', async(result) => {
       if (result) {
-        alert('User clicked Yes!');
+        console.log(JSON.stringify(formData))
+        try {
+          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
+            method: "PUT", // Specify the HTTP method
+            headers: {
+              "Content-Type": "application/json", // Required for JSON payload
+            },
+            
+            body: JSON.stringify(formData), // Convert ad data to JSON string
+          });
+
+          // Check if the response is successful
+          if (!response.ok) {
+            throw new Error(`Failed to PUT ad. Status: ${response.status}, Message: ${response.statusText}`);
+          }
+
+          const result = await response.json(); // Parse the response JSON
+          console.log("Ad update successfully:", result);
+          updateUser(result.updatedUser)
+          navigate("/MyAccount/my-ads")
+        } catch (error) {
+          console.error("Error posting ad:", error.message);
+          throw error; // Re-throw the error for the caller to handle
+        }
       } else {
         alert('User clicked No!');
       }
@@ -40,58 +70,47 @@ export default function UpdatePersonalDetails() {
     <MyAccountSidebar />
     <div className="update-details-container">
       <h2>עדכון פרטים</h2>
+      <h2>{user.email}</h2>
       <form onSubmit={handleSubmit} className="update-details-form">
         {/* שם פרטי */}
         <div className="form-group">
-          <label htmlFor="firstName">שם פרטי*</label>
+          <label htmlFor="firstName">שם פרטי</label>
           <input
             type="text"
             id="firstName"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            required
+            
           />
         </div>
 
         {/* שם משפחה */}
         <div className="form-group">
-          <label htmlFor="lastName">שם משפחה*</label>
+          <label htmlFor="lastName">שם משפחה</label>
           <input
             type="text"
             id="lastName"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            required
+            
           />
         </div>
 
         {/* טלפון נייד */}
         <div className="form-group">
-          <label htmlFor="phone">טלפון נייד*</label>
+          <label htmlFor="phone">טלפון נייד</label>
           <input
             type="text"
             id="phone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            required
+            
           />
         </div>
 
-        {/* מייל */}
-        <div className="form-group">
-          <label htmlFor="email">מייל*</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
 
         {/* תאריך לידה */}
         <div className="form-group">
@@ -110,38 +129,38 @@ export default function UpdatePersonalDetails() {
         <h3>כתובת</h3>
         <p>כדאי למלא את הכתובת, כדי שנוכל לחבר אותה אוטומטית בפעם הבאה שתפרסמו מודעה</p>
         <div className="form-group">
-          <label htmlFor="city">יישוב / עיר*</label>
+          <label htmlFor="city">יישוב / עיר</label>
           <input
             type="text"
             id="city"
             name="city"
             value={formData.city}
             onChange={handleChange}
-            required
+            
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="street">רחוב*</label>
+          <label htmlFor="street">רחוב</label>
           <input
             type="text"
             id="street"
             name="street"
             value={formData.street}
             onChange={handleChange}
-            required
+            
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="houseNumber">מספר בית*</label>
+          <label htmlFor="houseNumber">מספר בית</label>
           <input
             type="text"
             id="houseNumber"
             name="houseNumber"
             value={formData.houseNumber}
             onChange={handleChange}
-            required
+            
           />
         </div>
 

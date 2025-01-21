@@ -10,7 +10,6 @@ export default function MyAccount() {
     <div>
       <MyAccountSidebar />
       <MyAds />
-
     </div>
   )
 }

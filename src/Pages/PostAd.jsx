@@ -1,11 +1,16 @@
-import React,{ useState } from "react";
+import React,{ useContext, useState } from "react";
 import "../CSS/PostAd.css";
 import { postAd } from "../apicalls/PostAd";
 import convertImagesToBase64, { GetImageUpload } from "../FCglobal/convertImagesToBase64";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../FCglobal/ContextUser";
+import { AllAdsContext } from "../FCglobal/ContextAllAds";
 
 export default function PostAd() {
   const navigate = useNavigate();
+  const { user ,AddAdToUserMyAds} = useContext(UserContext);
+  const { addNewAd } = useContext(AllAdsContext);
+  
   const [images, setImages] = useState([]);
   const [productCondition, setProductCondition] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -77,7 +82,7 @@ export default function PostAd() {
       headers: {
         "Content-Type": "application/json", // Required for JSON payload
       },
-      body: JSON.stringify(fullAd), // Convert ad data to JSON string
+      body: JSON.stringify({...fullAd,userId:user.id}), // Convert ad data to JSON string
     });
 
     // Check if the response is successful
@@ -87,7 +92,9 @@ export default function PostAd() {
 
     const result = await response.json(); // Parse the response JSON
     console.log("Ad posted successfully:", result);
-    navigate("/MyAccount")
+    AddAdToUserMyAds(result.item.id)
+    addNewAd(result.item)
+    navigate("/MyAccount/my-ads")
   } catch (error) {
     console.error("Error posting ad:", error.message);
     throw error; // Re-throw the error for the caller to handle

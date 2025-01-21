@@ -78,7 +78,7 @@ export default function AdDisplayMyAds({ ad }) {
         <p className="category">{ad.category}</p>
       </div>
       <img
-        src={ad.image || 'placeholder.jpg'}
+        src={ad.images[0] || 'placeholder.jpg'}
         className="ad-thumbnail"
         alt={ad.title || 'Ad thumbnail'}
         onClick={goToAdDetails}
