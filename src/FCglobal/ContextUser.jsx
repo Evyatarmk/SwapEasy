@@ -54,7 +54,7 @@ export const UserProvider = (props) => {
         const [userId, email] = DecodeIDToken(idToken)
 
         // Send userId to the server
-        fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
+         fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -94,10 +94,11 @@ export const UserProvider = (props) => {
   };
   // Function to update a user
   const updateUserMyAds = (id) => {
-    let newMyAd = user.myAds.filter(adId => adId = !id)
+    let newMyAd = user.myAds.filter(adId => adId !=id)
+    console.log(newMyAd)
+
     let newUser = { ...user, myAds: newMyAd }
     setUser(newUser);
-    console.log(newUser)
   };
   
 // Function to update a user's saved ads

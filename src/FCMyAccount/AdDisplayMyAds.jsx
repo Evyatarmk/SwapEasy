@@ -42,7 +42,6 @@ export default function AdDisplayMyAds({ ad }) {
           const result = await response.json(); // Parse the response JSON
           console.log("Ad DELETE successfully:", result);
           updateUserMyAds(ad.id)
-          navigate("/MyAccount")
         } catch (error) {
           console.error("Error posting ad:", error.message);
           throw error; // Re-throw the error for the caller to handle
