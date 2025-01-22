@@ -16,7 +16,7 @@ const fetchAllAds = async () => {
     setError(null);
 
     // Fetch data from the API
-    const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ads", {
+    const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Ad", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const fetchAllAds = async () => {
     const ads = await response.json();
 
     // Update the state with the fetched ads
-    setAllAds(ads.body);
+    setAllAds(ads.ads);
   } catch (err) {
     // Handle errors
     console.error("Error fetching ads:", err.message);

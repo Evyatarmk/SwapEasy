@@ -11,7 +11,7 @@ import { AllAdsContext } from '../FCglobal/ContextAllAds';
 export default function AdDisplayAdmin({ ad }) {
   const navigate = useNavigate();
   const { showPopup } = useContext(PopupContext);
-  const { updateUserMyAds } = useContext(UserContext);
+  const { updateUserMyAds ,user} = useContext(UserContext);
   const { removeAd } = useContext(AllAdsContext);
 
   const goToAdDetails = () => {
@@ -33,13 +33,15 @@ export default function AdDisplayAdmin({ ad }) {
                   navigate("")
                 return;
               }
-          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
+              console.log("Authorization:"+idToken)
+              console.log(JSON.stringify({id:ad.id}))
+          const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Admin", {
             method: "DELETE", // Specify the HTTP method
             headers: {
               "Content-Type": "application/json", // Required for JSON payload
               "Authorization":idToken
             },
-            body: JSON.stringify({id:ad.id}), // Convert ad data to JSON string
+            body: JSON.stringify({Username:user.id,id:ad.id}), // Convert ad data to JSON string
           });
 
           // Check if the response is successful

@@ -5,6 +5,7 @@ import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import haertIcon from '../Icons/heart.png';
 import heartEmptyIcon from '../Icons/heartEmpty.png';
 import { UserContext } from "../FCglobal/ContextUser";
+import isTokenValid from "../FCglobal/isTokenValid";
 
 export default function adDetails() {
   const [showAllImages, setShowAllImages] = useState(false);
@@ -20,7 +21,7 @@ export default function adDetails() {
             return;}
     deleteOrAddToUserSavedAds(ad.id)
     try {
-      const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User/SavedAds", {
+      const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/User/SavedAds", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

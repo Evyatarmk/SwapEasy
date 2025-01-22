@@ -63,7 +63,7 @@ def lambda_handler(event, context):
             }
 
         # Check if the ad ID exists in the user's "MyAds" array
-        my_ads = user.get("MyAds", [])
+        my_ads = user.get("myAds", [])
         if ad_id not in my_ads:
             return {
                 "statusCode": 403,

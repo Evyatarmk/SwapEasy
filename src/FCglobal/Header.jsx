@@ -9,7 +9,7 @@ export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
-  const loginHref="https://us-east-1ecoh9tvdf.auth.us-east-1.amazoncognito.com/login/continue?client_id=hv93sgcsom9m5jqtkl2e7id67&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html&response_type=token&scope=email+openid+phone"
+  const loginHref="https://us-east-1ox3ph0c5m.auth.us-east-1.amazoncognito.com/login?client_id=75gadpm7rmsms7r733kmr6ffi0&response_type=token&scope=email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F"
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const handleMouseEnter = () => setDropdownVisible(true);
   const handleMouseLeave = () => setDropdownVisible(false);

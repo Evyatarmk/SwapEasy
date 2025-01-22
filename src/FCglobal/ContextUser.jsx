@@ -37,16 +37,15 @@ export const UserProvider = (props) => {
             localStorage.setItem("idToken", idToken1);
             localStorage.setItem("accessToken", accessToken);
             const [userId, email] = DecodeIDToken(idToken1)
-            window.location.replace(
-              "https://swap-easy.s3.us-east-1.amazonaws.com/index.html"
-            );}
+           
+            }
   }
     const idToken = localStorage.getItem("idToken");
     if (idToken && isTokenValid(idToken)) {
       const [userId, email] = DecodeIDToken(idToken)
-      
+      console.log(JSON.stringify({ id: userId, email }))
         // Send userId to the server
-        fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
+        fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/User", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -110,7 +109,7 @@ export const UserProvider = (props) => {
   
         try {
           // שליחת userId לשרת
-          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
+          const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Admin", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

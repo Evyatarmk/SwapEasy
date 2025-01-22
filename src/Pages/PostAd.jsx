@@ -92,7 +92,7 @@ setAd({
       };
       console.log(JSON.stringify({ ...fullAd, userId: user.id }))
       try {
-        const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
+        const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Ad", {
           method: "POST", // Specify the HTTP method
           headers: {
             "Content-Type": "application/json", // Required for JSON payload

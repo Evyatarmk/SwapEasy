@@ -6,11 +6,13 @@ import deleteIcon from '../Icons/delete.png';
 import { PopupContext } from '../FCglobal/Popup';
 import { UserContext } from '../FCglobal/ContextUser';
 import isTokenValid from '../FCglobal/isTokenValid';
+import { AllAdsContext } from '../FCglobal/ContextAllAds';
 
 export default function AdDisplayMyAds({ ad }) {
   const navigate = useNavigate();
   const { showPopup } = useContext(PopupContext);
   const { user,updateUserMyAds } = useContext(UserContext);
+  const { removeAd } = useContext(AllAdsContext);
 
   const goToAdDetails = () => {
     navigate(`/ad-details/${ad.id}`);
@@ -32,7 +34,7 @@ export default function AdDisplayMyAds({ ad }) {
                 return;
               }
               console.log( JSON.stringify({id:ad.id,userId:user.id}))
-          const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Ad", {
+          const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Ad", {
             method: "DELETE", // Specify the HTTP method
             headers: {
               "Content-Type": "application/json", // Required for JSON payload

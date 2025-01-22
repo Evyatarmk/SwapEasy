@@ -10,6 +10,7 @@ import isTokenValid from "../FCglobal/isTokenValid";
 export default function UpdateAd() {
   const { updateAd } = useContext(AllAdsContext);
   const location = useLocation();
+  const { updateUserMyAds ,user} = useContext(UserContext);
   const adToUpdate = location.state.ad;
   const [images, setImages] = useState(adToUpdate.images || []);
   const [productCondition, setProductCondition] = useState(adToUpdate.condition || "");
@@ -86,13 +87,13 @@ const handleCancel=()=>{
           console.log(JSON.stringify(fullAd))
           console.log( "Authorization:"+idToken)
           try {
-            const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
+            const response = await fetch("https://esg7w0u40m.execute-api.us-east-1.amazonaws.com/Dev/Admin", {
               method: "PUT", // Specify the HTTP method
               headers: {
                 "Content-Type": "application/json", // Required for JSON payload
                 "Authorization":idToken
               },
-              body: JSON.stringify(fullAd), // Convert ad data to JSON string
+              body: JSON.stringify({...fullAd,Username:user.id}), // Convert ad data to JSON string
             });
 
             // Check if the response is successful
