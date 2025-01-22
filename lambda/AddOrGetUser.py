@@ -67,7 +67,7 @@ def lambda_handler(event, context):
             "street": "",
             "houseNumber": "",
             "myAds": [],  # Default to an empty list
-            "savedAd": []  # Default to an empty list
+            "savedAds": []  # Default to an empty list
         }
 
         # Put the item into the DynamoDB table

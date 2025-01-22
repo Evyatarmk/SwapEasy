@@ -5,6 +5,9 @@ from decimal import Decimal
 # Initialize AWS services
 s3 = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
+cognito_client = boto3.client('cognito-idp')
+
+USER_POOL_ID = "us-east-1_Ox3pH0c5M"  # Replace with your actual User Pool ID
 
 # Replace with your S3 bucket name and DynamoDB table name
 BUCKET_NAME = "swap-easy-images"
@@ -19,14 +22,47 @@ def decimal_default(obj):
         return float(obj)
     raise TypeError
 
+def is_user_admin(user_id):
+    try:
+        # List groups for the user
+        response = cognito_client.admin_list_groups_for_user(
+            UserPoolId=USER_POOL_ID,
+            Username=user_id
+        )
+
+        # Extract the groups
+        groups = response.get('Groups', [])
+
+        # Check if the user is part of the Admins group
+        return any(group['GroupName'] == "Admins" for group in groups)
+
+    except Exception as e:
+        print(f"Error checking user admin status: {str(e)}")
+        return False
+
 def lambda_handler(event, context):
     try:
         # Log the incoming event
         print("Event: ", event)
+        body = json.loads(event.get('body', '{}'))
 
-        # Extract user group information
-        user_groups = event.get("requestContext", {}).get("authorizer", {}).get("claims", {}).get("cognito:groups", "")
-        if "Admins" not in user_groups.split(","):
+        # Extract user information (Cognito UserID from the request context)
+        user_id =  body.get("Username")
+        
+        if not user_id:
+            return {
+                "statusCode": 400,
+                "body": json.dumps({"error": "Missing 'user_id' field"}),
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "DELETE,OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type,Authorization"
+                }
+            }
+
+        # Check if the user is an admin
+        if not is_user_admin(user_id):
             return {
                 "statusCode": 403,
                 "body": json.dumps({"error": "User is not authorized to delete ads"}),
