@@ -32,7 +32,7 @@ useEffect(() => {
       if (result) {
            const idToken = localStorage.getItem("idToken"); 
                 if (!idToken || !isTokenValid(idToken)) {
-                  navigate("/index.html")
+                  navigate("/")
                 return;
             }
         console.log(JSON.stringify(formData))

@@ -6,9 +6,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { UserProvider } from './FCglobal/ContextUser.jsx'
 import { AllAdsProvider } from './FCglobal/ContextAllAds.jsx'
 import { PopupProvider } from './FCglobal/Popup.jsx'
+import { CityProvider } from './FCglobal/CityProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
+  <CityProvider>
     <UserProvider>
       <AllAdsProvider>
       <PopupProvider>
@@ -18,6 +20,7 @@ createRoot(document.getElementById('root')).render(
         </PopupProvider>
       </AllAdsProvider>
     </UserProvider>
+    </CityProvider>
   </BrowserRouter>
 
 )

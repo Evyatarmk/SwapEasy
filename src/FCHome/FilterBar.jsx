@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import "../CSS/FilterBar.css";
 import Select from 'react-select';
 import { AllAdsContext } from '../FCglobal/ContextAllAds';
+import { useCityContext } from '../FCglobal/CityProvider';
 
 export default function FilterBar(props) {
   const { allAds, loading, error } = useContext(AllAdsContext);
   const categories = allAds.length > 0 ? [...new Set(allAds.map(ad => ad.category))] : [];
   const [selectedCategory, setSelectedCategory] = useState(categories[0] || "");
+  const { cities } = useCityContext(); // גישה לרשימת הערים דרך ה-Context
 
   // Hook to handle category change and send filtered ads to parent
   useEffect(() => {
@@ -31,13 +33,15 @@ export default function FilterBar(props) {
     search: "",
   });
 
-  const cityOptions = [
-    { value: 'תל אביב', label: 'תל אביב' },
-    { value: 'ירושלים', label: 'ירושלים' },
-    { value: 'חיפה', label: 'חיפה' },
-    { value:  'באר שבע', label: 'באר שבע' },
-    { value: 'אילת', label: 'אילת' },
-  ];
+  const cityOptions = cities.length > 0 
+  ? [...cities.map((city) => ({ value: city, label: city }))]
+  : [
+      { value: "תל אביב", label: "תל אביב" },
+      { value: "ירושלים", label: "ירושלים" },
+      { value: "חיפה", label: "חיפה" },
+      { value: "באר שבע", label: "באר שבע" },
+      { value: "אילת", label: "אילת" },
+    ];
 
   const conditionOptions = [
     { value: 'חדש באריזה', label: 'חדש באריזה' },

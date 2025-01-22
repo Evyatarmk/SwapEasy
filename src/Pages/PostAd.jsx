@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../FCglobal/ContextUser";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import isTokenValid from "../FCglobal/isTokenValid";
+import { useCityContext } from "../FCglobal/CityProvider";
 
 export default function PostAd() {
   const navigate = useNavigate();
   const { user, AddAdToUserMyAds } = useContext(UserContext);
   const { addNewAd } = useContext(AllAdsContext);
+  const { cities } = useCityContext(); // גישה לרשימת הערים דרך ה-Context
 
   const [images, setImages] = useState([]);
   const [productCondition, setProductCondition] = useState("");
@@ -72,7 +74,7 @@ setAd({
     e.preventDefault();
     const idToken = localStorage.getItem("idToken");
     if (!idToken || !isTokenValid(idToken)) {
-      navigate("/index.html")
+      navigate("/")
       return;
     }
 
@@ -216,6 +218,7 @@ setAd({
               value={Ad.city}
             />
           </label>
+       
           <label>
             רחוב:
             <input
