@@ -6,12 +6,14 @@ from decimal import Decimal
 s3 = boto3.client('s3')
 dynamodb = boto3.resource('dynamodb')
 
-# Replace with your S3 bucket name and DynamoDB table name
+# Replace with your S3 bucket name and DynamoDB table names
 BUCKET_NAME = "swap-easy-images"
-TABLE_NAME = "Ads"
+ADS_TABLE_NAME = "Ads"
+USERS_TABLE_NAME = "Users"
 
-# DynamoDB table reference
-table = dynamodb.Table(TABLE_NAME)
+# DynamoDB table references
+ads_table = dynamodb.Table(ADS_TABLE_NAME)
+users_table = dynamodb.Table(USERS_TABLE_NAME)
 
 # Helper function to convert Decimal to JSON-serializable format
 def decimal_default(obj):
@@ -41,7 +43,7 @@ def lambda_handler(event, context):
             }
 
         # Get the ad details from DynamoDB
-        response = table.get_item(Key={"id": ad_id})
+        response = ads_table.get_item(Key={"id": ad_id})
         item = response.get('Item')
 
         if not item:
@@ -56,6 +58,39 @@ def lambda_handler(event, context):
                 }
             }
 
+        # Get the user_id of the ad (assuming it's stored in the ad item)
+        user_id = body.get('userId')
+
+        if not user_id:
+            return {
+                "statusCode": 400,
+                "body": json.dumps({"error": "User ID not found in the ad"}),
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "DELETE,OPTIONS",
+                    "Access-Control-Allow-Headers": "Content-Type,Authorization"
+                }
+            }
+
+        # First, get the user details to check the existing myAds list
+        response = users_table.get_item(Key={"id": user_id})
+        user_item = response.get('Item')
+
+        if user_item:
+            my_ads = user_item.get('myAds', [])
+
+            # Remove the ad_id from the list
+            updated_ads = [ad for ad in my_ads if ad != ad_id]
+
+            # Update the user's myAds field with the new list
+            users_table.update_item(
+                Key={"id": user_id},
+                UpdateExpression="SET myAds = :updated_ads",
+                ExpressionAttributeValues={":updated_ads": updated_ads},
+                ReturnValues="UPDATED_NEW"
+            )
+
         # Delete images from S3
         images = item.get('images', [])
         for image_url in images:
@@ -67,7 +102,7 @@ def lambda_handler(event, context):
                 print(f"Error deleting image {image_url}: {s3_error}")
 
         # Delete the ad from DynamoDB
-        table.delete_item(Key={"id": ad_id})
+        ads_table.delete_item(Key={"id": ad_id})
 
         # Return success response
         return {
