@@ -83,7 +83,8 @@ const handleCancel=()=>{
             condition: productCondition,
             images: base64Images,
           };
-          console.log(fullAd)
+          console.log(JSON.stringify(fullAd))
+          console.log( "Authorization:"+idToken)
           try {
             const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {
               method: "PUT", // Specify the HTTP method

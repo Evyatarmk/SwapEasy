@@ -20,7 +20,7 @@ export default function AdDisplayAdmin({ ad }) {
 
   const handleEdit = (e) => {
     e.stopPropagation();
-    navigate('/MyAccount/update-Ad',{state:{ad:ad}});
+    navigate('/UpdateAdAdmin/',{state:{ad:ad}});
   };
 
   const handleDelete = (e) => {

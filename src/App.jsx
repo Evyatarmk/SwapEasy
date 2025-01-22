@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import AdminPage from './Pages/AdminPage';
 import ProtectedRoute from './FCglobal/ProtectedRoute'; // ייבוא קומפוננטת הגנה
 import isTokenValid from './FCglobal/isTokenValid';
+import UpdateAdAdmin from './FCAdmin/UpdateAdAdmin';
 
 function App() {
   
@@ -38,6 +39,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/UpdateAdAdmin"
+          element={
+            <ProtectedRoute>
+              <UpdateAdAdmin/>
             </ProtectedRoute>
           }
         />
