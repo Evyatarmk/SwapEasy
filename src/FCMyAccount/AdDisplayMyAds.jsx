@@ -28,7 +28,7 @@ export default function AdDisplayMyAds({ ad }) {
         try {
          const idToken = localStorage.getItem("idToken"); 
                 if (!idToken || !isTokenValid(idToken)) {
-                  navigate("/")
+                  navigate("")
                 return;
               }
               console.log( JSON.stringify({id:ad.id,userId:user.id}))

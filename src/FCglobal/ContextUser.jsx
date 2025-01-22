@@ -1,9 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
 import isTokenValid from "./isTokenValid";
+import { useNavigate } from 'react-router-dom';
 
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
+  const navigate = useNavigate();
+
   // State to hold the array of users
   const [user, setUser] = useState({
     firstName: "",
@@ -20,10 +23,28 @@ export const UserProvider = (props) => {
   });
   
   useEffect(() => {
+    const url = window.location.href;
+  if (url.includes("id_token") && url.includes("access_token")) {
+          // Parse the hash fragment to extract tokens
+          const hashParams = new URLSearchParams(window.location.hash.substring(1));
+          console.log("dddddd") 
+          const idToken1 = hashParams.get("id_token");
+          const accessToken = hashParams.get("access_token");
+    
+          if (idToken1 && accessToken) {
+            // Save tokens in localStorage
+            
+            localStorage.setItem("idToken", idToken1);
+            localStorage.setItem("accessToken", accessToken);
+            const [userId, email] = DecodeIDToken(idToken1)
+            window.location.replace(
+              "https://swap-easy.s3.us-east-1.amazonaws.com/index.html"
+            );}
+  }
     const idToken = localStorage.getItem("idToken");
     if (idToken && isTokenValid(idToken)) {
       const [userId, email] = DecodeIDToken(idToken)
-
+      
         // Send userId to the server
         fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
           method: "POST",
@@ -50,10 +71,11 @@ export const UserProvider = (props) => {
 
       if (idToken && accessToken) {
         // Save tokens in localStorage
+        
         localStorage.setItem("idToken", idToken);
         localStorage.setItem("accessToken", accessToken);
         const [userId, email] = DecodeIDToken(idToken)
-
+      
         // Send userId to the server
          fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/User", {
           method: "POST",

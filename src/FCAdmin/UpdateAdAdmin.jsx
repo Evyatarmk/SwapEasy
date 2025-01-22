@@ -73,7 +73,7 @@ const handleCancel=()=>{
       if (result) {
         const idToken = localStorage.getItem("idToken"); 
         if (!idToken || !isTokenValid(idToken)) {
-          navigate("/")
+          navigate("")
         return;
     }
         GetImageUpload(images, async (base64Images) => {

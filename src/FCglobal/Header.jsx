@@ -18,13 +18,13 @@ export default function Header() {
     <header className="fixed-header">
       {/* Logo */}
 
-      <Link to="/"><img className="logo" src={SwapEasy} /></Link>
+      <Link to=""><img className="logo" src={SwapEasy} /></Link>
 
 
       {/* Desktop Navigation */}
       <nav className="desktop-nav">
         <ul className="nav-links">
-          <li><Link to="/">המוצרים שלנו</Link></li>
+          <li><Link to="">המוצרים שלנו</Link></li>
           <li
             className="dropdown-wrapper"
             onMouseEnter={handleMouseEnter}
@@ -40,7 +40,7 @@ export default function Header() {
                 <li><a onClick={() => {
                   toggleSidebar()
                   localStorage.clear();
-                  navigate("/")
+                  navigate("")
                 }}>התנתק</a></li>
               </ul>
             )}
@@ -57,14 +57,14 @@ export default function Header() {
       <nav className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="close-button" onClick={toggleSidebar}>✖</button>
         <ul className="nav-links">
-          <li><Link to="/" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
+          <li><Link to="" onClick={toggleSidebar}>המוצרים שלנו</Link></li>
           <li className="publish-ad-button"><Link to="/post-ad" onClick={toggleSidebar}>+ פרסום מודעה</Link></li>
           <li><Link to="/MyAccount" onClick={toggleSidebar}>אזור אישי</Link></li>
           <li><a onClick={toggleSidebar} href="https://us-east-1ecoh9tvdf.auth.us-east-1.amazoncognito.com/login/continue?client_id=hv93sgcsom9m5jqtkl2e7id67&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html&response_type=token&scope=email+openid+phone">התחברות</a></li>
           <li><a onClick={() => {
                   toggleSidebar()
                   localStorage.clear();
-                  navigate("/")
+                  navigate("")
                 }}>התנתק</a></li>
           {/* Admin Button */}
         </ul>

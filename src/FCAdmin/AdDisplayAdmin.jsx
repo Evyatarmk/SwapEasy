@@ -30,7 +30,7 @@ export default function AdDisplayAdmin({ ad }) {
         try {
          const idToken = localStorage.getItem("idToken"); 
                 if (!idToken || !isTokenValid(idToken)) {
-                  navigate("/")
+                  navigate("")
                 return;
               }
           const response = await fetch("https://ozshfkh0yg.execute-api.us-east-1.amazonaws.com/dev/Admin", {

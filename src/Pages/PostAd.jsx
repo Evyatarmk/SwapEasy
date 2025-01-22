@@ -74,7 +74,7 @@ setAd({
     e.preventDefault();
     const idToken = localStorage.getItem("idToken");
     if (!idToken || !isTokenValid(idToken)) {
-      navigate("/")
+      navigate("")
       return;
     }
 

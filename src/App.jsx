@@ -22,7 +22,7 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="" element={<Home />} />
         <Route path="/ad-details/:adId" element={<AdDetails />} />
 
         {/* נתיבים מוגנים */}
