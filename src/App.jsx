@@ -14,6 +14,7 @@ import AdminPage from './Pages/AdminPage';
 import ProtectedRoute from './FCglobal/ProtectedRoute'; // ייבוא קומפוננטת הגנה
 import isTokenValid from './FCglobal/isTokenValid';
 import UpdateAdAdmin from './FCAdmin/UpdateAdAdmin';
+import ErrorPage from './Pages/ErrorPage';
 
 function App() {
   
@@ -32,6 +33,13 @@ function App() {
             <ProtectedRoute>
               <PostAd />
             </ProtectedRoute>
+          }
+        />
+        {/* נתיבים מוגנים */}
+        <Route
+          path="/ErrorPage"
+          element={
+              <ErrorPage />
           }
         />
         <Route

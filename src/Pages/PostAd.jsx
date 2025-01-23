@@ -8,6 +8,7 @@ import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import isTokenValid from "../FCglobal/isTokenValid";
 import { useCityContext } from "../FCglobal/CityProvider";
 import { useLoading } from "../FCglobal/ContextLoading";
+import ErrorPage from "./ErrorPage";
 
 export default function PostAd() {
   const navigate = useNavigate();

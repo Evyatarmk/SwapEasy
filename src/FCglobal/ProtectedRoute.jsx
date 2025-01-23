@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }) => {
   console.log("sss")
   if (!idToken || !isTokenValid(idToken)) {
     // הפנה את המשתמש לכתובת ההתחברות המלאה
-    window.location.href ="https://us-east-1ox3ph0c5m.auth.us-east-1.amazoncognito.com/login?client_id=75gadpm7rmsms7r733kmr6ffi0&response_type=token&scope=email+openid+phone&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F";
+    window.location.href ="https://us-east-1ox3ph0c5m.auth.us-east-1.amazoncognito.com/login?client_id=75gadpm7rmsms7r733kmr6ffi0&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html";
     return null; // החזר null כדי למנוע רינדור הקומפוננטה
   }
 

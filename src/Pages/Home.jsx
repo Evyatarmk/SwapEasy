@@ -27,7 +27,6 @@ export default function Home() {
     setAdsToShow(ads)
   }
   const { allAds } = useContext(AllAdsContext);
-   
 
 return (
   <div className="home-container">

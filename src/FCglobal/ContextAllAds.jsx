@@ -1,9 +1,11 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Create a Context for the ads
 export const AllAdsContext = createContext();
 
 export const AllAdsProvider = ({ children }) => {
+  const navigate = useNavigate();
 
   const [allAds, setAllAds] = useState([]);
   const [loading, setLoading] = useState(true); // State to track loading status
@@ -36,11 +38,8 @@ const fetchAllAds = async () => {
   } catch (err) {
     // Handle errors
     console.error("Error fetching ads:", err.message);
-    setError(err.message);
-  } finally {
-    // Ensure loading is false after the operation
-    setLoading(false);
-  }
+    navigate("/ErrorPage")
+  } 
 };
 
   // Fetch ads when the component mounts

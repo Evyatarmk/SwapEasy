@@ -59,6 +59,7 @@ export const UserProvider = (props) => {
             setUser(data.user)
           })
           .catch((error) => {
+            navigate("/ErrorPage")
             console.error("Error sending userId to the server:", error);
           });
     }
