@@ -13,15 +13,15 @@ createRoot(document.getElementById('root')).render(
   <HashRouter>
  <LoadingProvider>
   <CityProvider>
-    <UserProvider>
       <AllAdsProvider>
+    <UserProvider>
       <PopupProvider>
         <StrictMode>
           <App />
         </StrictMode>
         </PopupProvider>
-      </AllAdsProvider>
     </UserProvider>
+      </AllAdsProvider>
     </CityProvider>
     </LoadingProvider>
   </HashRouter>

@@ -1,11 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import isTokenValid from "./isTokenValid";
 import { useNavigate } from 'react-router-dom';
+import { AllAdsContext } from './ContextAllAds';
 
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
   const navigate = useNavigate();
+  const { removeAd,allAds } = useContext(AllAdsContext);
 
   // State to hold the array of users
   const [user, setUser] = useState({
@@ -154,8 +156,9 @@ export const UserProvider = (props) => {
   const updateUserMyAds = (id) => {
     let newMyAd = user.myAds.filter(adId => adId !=id)
     console.log(newMyAd)
-
+    
     let newUser = { ...user, myAds: newMyAd }
+    removeAd(id)
     setUser(newUser);
   };
   

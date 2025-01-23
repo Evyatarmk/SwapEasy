@@ -6,6 +6,7 @@ import { GetImageUpload } from "../FCglobal/convertImagesToBase64";
 import { UserContext } from "../FCglobal/ContextUser";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import isTokenValid from "../FCglobal/isTokenValid";
+import { useLoading } from "../FCglobal/ContextLoading";
 
 export default function UpdateAd() {
   const { updateAd } = useContext(AllAdsContext);
@@ -18,6 +19,7 @@ export default function UpdateAd() {
   const [Ad, setAd] = useState({ ...adToUpdate });
   const { showPopup } = useContext(PopupContext);
   const navigate = useNavigate();
+    const { showLoading, hideLoading } = useLoading();
  
   // Handle input change for all fields
   const handleChange = (e) => {
@@ -64,14 +66,15 @@ const handleCancel=()=>{
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
       return;
     }
-
+    
     showPopup('?לעדכן את המודעה ', (result) => {
       if (result) {
+        showLoading()
         const idToken = localStorage.getItem("idToken"); 
         if (!idToken || !isTokenValid(idToken)) {
           navigate("")
@@ -98,14 +101,17 @@ const handleCancel=()=>{
 
             // Check if the response is successful
             if (!response.ok) {
+              hideLoading()
               throw new Error(`Failed to PUT ad. Status: ${response.status}, Message: ${response.statusText}`);
             }
 
             const result = await response.json(); // Parse the response JSON
             console.log("Ad update successfully:", result);
             updateAd(result.item)
+            hideLoading()
             navigate("/AdminPage")
           } catch (error) {
+            hideLoading()
             console.error("Error posting ad:", error.message);
             throw error; // Re-throw the error for the caller to handle
           }

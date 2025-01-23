@@ -7,12 +7,14 @@ import { PopupContext } from '../FCglobal/Popup';
 import { UserContext } from '../FCglobal/ContextUser';
 import isTokenValid from '../FCglobal/isTokenValid';
 import { AllAdsContext } from '../FCglobal/ContextAllAds';
+import { useLoading } from '../FCglobal/ContextLoading';
 
 export default function AdDisplayMyAds({ ad }) {
   const navigate = useNavigate();
   const { showPopup } = useContext(PopupContext);
   const { user,updateUserMyAds } = useContext(UserContext);
   const { removeAd } = useContext(AllAdsContext);
+  const { showLoading, hideLoading } = useLoading();
 
   const goToAdDetails = () => {
     navigate(`/ad-details/${ad.id}`);
@@ -27,6 +29,7 @@ export default function AdDisplayMyAds({ ad }) {
     e.stopPropagation();
     showPopup('?האם למחוק את המודעה',async (result) => {
       if (result) {
+        showLoading()
         try {
          const idToken = localStorage.getItem("idToken"); 
                 if (!idToken || !isTokenValid(idToken)) {
@@ -45,18 +48,20 @@ export default function AdDisplayMyAds({ ad }) {
 
           // Check if the response is successful
           if (!response.ok) {
+            hideLoading()
             throw new Error(`Failed to DELETE ad. Status: ${response.status}, Message: ${response.statusText}`);
           }
 
           const result = await response.json(); // Parse the response JSON
           console.log("Ad DELETE successfully:", result);
           updateUserMyAds(ad.id)
-          removeAd(ad.id)
+          hideLoading()
         } catch (error) {
           console.error("Error posting ad:", error.message);
           throw error; // Re-throw the error for the caller to handle
         }
       } else {
+        hideLoading()
       }
     });
   };

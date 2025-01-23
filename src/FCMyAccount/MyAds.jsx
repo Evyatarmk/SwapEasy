@@ -13,10 +13,10 @@ export default function MyAds() {
   const [myAds, setMyAds] = useState([]);
 
   useEffect(() => {
-    console.log(user)
-    if (user?.myAds && allAds?.length) {
+    if (user?.myAds && allAds) {
       setMyAds(allAds.filter((ad) => user.myAds.includes(ad.id)));
     }
+    console.log(myAds)
   }, [allAds, user]);
 
 
