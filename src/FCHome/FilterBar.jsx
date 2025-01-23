@@ -34,7 +34,7 @@ export default function FilterBar(props) {
     search: "",
   });
 
-  const cityOptions = cities.length > 0 
+  const cityOptions = cities 
   ? [...cities.map((city) => ({ value: city, label: city }))]
   : [
       { value: "תל אביב", label: "תל אביב" },
@@ -145,7 +145,6 @@ export default function FilterBar(props) {
           onChange={handleCityChange}
         />
 
-        <div className="price-filter">
           <input
             type="number"
             name="minPrice"
@@ -162,7 +161,6 @@ export default function FilterBar(props) {
             placeholder="מחיר מקסימום"
             className="filter-input"
           />
-        </div>
 
         <Select
           isMulti
