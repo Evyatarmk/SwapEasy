@@ -87,15 +87,16 @@
   margin-bottom: 15px;
 }
 
-.menu-list a {
+.menu-list a,.admin-button {
   text-decoration: none;
   font-size: 16px;
   color: #333;
   font-weight: bold;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
-.menu-list a:hover {
+.menu-list a:hover,.admin-button:hover {
   color: #f0a500;
 }
 

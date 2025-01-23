@@ -7,12 +7,14 @@ import { UserContext } from "../FCglobal/ContextUser";
 import { AllAdsContext } from "../FCglobal/ContextAllAds";
 import isTokenValid from "../FCglobal/isTokenValid";
 import { useCityContext } from "../FCglobal/CityProvider";
+import { useLoading } from "../FCglobal/ContextLoading";
 
 export default function PostAd() {
   const navigate = useNavigate();
   const { user, AddAdToUserMyAds } = useContext(UserContext);
   const { addNewAd } = useContext(AllAdsContext);
   const { cities } = useCityContext(); // גישה לרשימת הערים דרך ה-Context
+  const { showLoading, hideLoading } = useLoading();
 
   const [images, setImages] = useState([]);
   const [productCondition, setProductCondition] = useState("");
@@ -72,6 +74,7 @@ setAd({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    showLoading()
     const idToken = localStorage.getItem("idToken");
     if (!idToken || !isTokenValid(idToken)) {
       navigate("")
@@ -103,6 +106,7 @@ setAd({
 
         // Check if the response is successful
         if (!response.ok) {
+          hideLoading()
           throw new Error(`Failed to post ad. Status: ${response.status}, Message: ${response.statusText}`);
         }
 
@@ -110,8 +114,10 @@ setAd({
         console.log("Ad posted successfully:", result);
         AddAdToUserMyAds(result.item.id)
         addNewAd(result.item)
+        hideLoading()
         navigate("/MyAccount/my-ads")
       } catch (error) {
+        hideLoading()
         console.error("Error posting ad:", error.message);
         throw error; // Re-throw the error for the caller to handle
       }

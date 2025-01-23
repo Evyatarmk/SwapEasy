@@ -27,18 +27,17 @@ export const UserProvider = (props) => {
   if (url.includes("id_token") && url.includes("access_token")) {
           // Parse the hash fragment to extract tokens
           const hashParams = new URLSearchParams(window.location.hash.substring(1));
-          console.log("dddddd") 
           const idToken1 = hashParams.get("id_token");
           const accessToken = hashParams.get("access_token");
     
           if (idToken1 && accessToken) {
             // Save tokens in localStorage
-            
+            console.log("ff")
             localStorage.setItem("idToken", idToken1);
             localStorage.setItem("accessToken", accessToken);
-            const [userId, email] = DecodeIDToken(idToken1)
-           
-            }
+            window.location.hash = "/";
+
+          }
   }
     const idToken = localStorage.getItem("idToken");
     if (idToken && isTokenValid(idToken)) {
@@ -64,7 +63,6 @@ export const UserProvider = (props) => {
     else {
       // Parse the hash fragment to extract tokens
       const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      console.log("dddddd") 
       const idToken = hashParams.get("id_token");
       const accessToken = hashParams.get("access_token");
 

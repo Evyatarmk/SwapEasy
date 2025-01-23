@@ -15,7 +15,7 @@ export default function MyAds() {
     <div className="my-ads-container">
       <MyAccountSidebar/>
         <div className="ads-section">
-         <h3>Admin Dashboard</h3>
+         <h3>דף ניהול</h3>
           {allAds.length > 0 ? (
             allAds.map((ad) => <AdDisplayAdmin ad={ad} key={ad.id} />)
           ) : (

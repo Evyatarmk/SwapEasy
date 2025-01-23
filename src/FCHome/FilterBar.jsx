@@ -12,6 +12,7 @@ export default function FilterBar(props) {
 
   // Hook to handle category change and send filtered ads to parent
   useEffect(() => {
+    console.log("rrrrr")
     if (categories.length > 0 && selectedCategory) {
       const filteredAds = allAds.filter((ad) => ad.category === selectedCategory);
       props.sendAdsToParent(filteredAds); // Send filtered ads to the parent

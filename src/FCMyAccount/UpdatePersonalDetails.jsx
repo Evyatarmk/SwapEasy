@@ -5,11 +5,13 @@ import MyAccountSidebar from "./MyAccountSidebar";
 import { PopupContext } from '../FCglobal/Popup';
 import { useNavigate } from 'react-router-dom';
 import isTokenValid from '../FCglobal/isTokenValid';
+import { useLoading } from '../FCglobal/ContextLoading';
 
 export default function UpdatePersonalDetails() {
   const { user,updateUser } = useContext(UserContext);
   const { showPopup } = useContext(PopupContext);
   const navigate = useNavigate();
+  const { showLoading, hideLoading } = useLoading();
 
   const [formData, setFormData] = useState(user);
 useEffect(() => {
@@ -30,6 +32,7 @@ useEffect(() => {
     e.preventDefault();
     showPopup('?לעדכן את הפרופיל ', async(result) => {
       if (result) {
+        showLoading()
            const idToken = localStorage.getItem("idToken"); 
                 if (!idToken || !isTokenValid(idToken)) {
                   navigate("")
@@ -49,27 +52,28 @@ useEffect(() => {
 
           // Check if the response is successful
           if (!response.ok) {
+            hideLoading()
             throw new Error(`Failed to PUT ad. Status: ${response.status}, Message: ${response.statusText}`);
           }
 
           const result = await response.json(); // Parse the response JSON
           console.log("Ad update successfully:", result);
           updateUser(result.updatedUser)
+          hideLoading()
           navigate("/MyAccount/my-ads")
         } catch (error) {
+          hideLoading()
           console.error("Error posting ad:", error.message);
           throw error; // Re-throw the error for the caller to handle
         }
       } else {
-        alert('User clicked No!');
       }
     });
 
   };
 
   const handleCancel = () => {
-    // פעולה לביטול (ניתן לאפס את השדות אם נדרש)
-    alert("השינויים בוטלו.");
+    navigate("/MyAccount/my-ads")
   };
 
   return (

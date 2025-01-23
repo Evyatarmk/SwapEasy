@@ -7,9 +7,11 @@ import { UserProvider } from './FCglobal/ContextUser.jsx'
 import { AllAdsProvider } from './FCglobal/ContextAllAds.jsx'
 import { PopupProvider } from './FCglobal/Popup.jsx'
 import { CityProvider } from './FCglobal/CityProvider.jsx'
+import { LoadingProvider } from './FCglobal/ContextLoading.jsx'
 
 createRoot(document.getElementById('root')).render(
   <HashRouter>
+ <LoadingProvider>
   <CityProvider>
     <UserProvider>
       <AllAdsProvider>
@@ -21,6 +23,7 @@ createRoot(document.getElementById('root')).render(
       </AllAdsProvider>
     </UserProvider>
     </CityProvider>
+    </LoadingProvider>
   </HashRouter>
 
 )
