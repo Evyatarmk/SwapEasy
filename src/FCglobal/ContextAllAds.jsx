@@ -55,7 +55,7 @@ const fetchAllAds = async () => {
 
   // Function to remove an ad by ID
   const removeAd = (id) => {
-    setAllAds((prevAds) => prevAds.filter((ad) => ad.id !== id));
+    setAllAds((prevAds) => prevAds.filter((ad) => ad.id != id));
   };
 
   // Function to get an ad by ID

@@ -66,7 +66,7 @@ export default function MyAccountSidebar() {
           <li><Link to="/MyAccount/update-personal-details">עדכון פרטים</Link></li>
           <li><Link to="/MyAccount/saved-ads">מודעות שמורות</Link></li>
           {isAdmin && <li className="admin-button"><Link to="/AdminPage">דף ניהול</Link></li>}
-          {isAdmin && <li className="admin-button">צור דוח</li>}
+          {isAdmin && <li   onClick={createReport} className="admin-button">צור דוח</li>}
 
         </ul>
       </div>
