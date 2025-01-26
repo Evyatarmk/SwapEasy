@@ -17,7 +17,8 @@ export default function adDetails() {
     e.stopPropagation();
     const idToken = localStorage.getItem("idToken"); 
             if (!idToken || !isTokenValid(idToken)) {
-              window.location.href ="https://us-east-1ecoh9tvdf.auth.us-east-1.amazoncognito.com/login?client_id=hv93sgcsom9m5jqtkl2e7id67&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html";
+              const loginHref="https://us-east-1ox3ph0c5m.auth.us-east-1.amazoncognito.com/login?client_id=75gadpm7rmsms7r733kmr6ffi0&response_type=token&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fswap-easy.s3.us-east-1.amazonaws.com%2Findex.html"
+              window.location.href =loginHref;
             return;}
     deleteOrAddToUserSavedAds(ad.id)
     try {

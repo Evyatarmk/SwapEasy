@@ -75,17 +75,18 @@ setAd({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    showLoading()
     const idToken = localStorage.getItem("idToken");
     if (!idToken || !isTokenValid(idToken)) {
       navigate("")
       return;
     }
-
+    
     if (!productCondition) {
       setErrorMessage("יש לבחור מצב למוצר לפני פרסום המודעה.");
+      window.scrollTo(0, 0);
       return;
     }
+    showLoading()
 
     GetImageUpload(images, async (base64Images) => {
       // Combine all ad details into a single object
